@@ -1,0 +1,57 @@
+{% extends '../header_footer_template.html' %}
+
+{% block content %}
+<div class="container" ng-app='cartInfoApp' ng-controller='cartInfoController'>
+    <div class="col-lg-8 col-md-11 mx-auto mt-3">
+        <h4 class="alert alert-info">Your Cart</h4>
+        <table class="table p-4 m-4 mx-auto">
+            <tr>
+                <th>Sno.</th>
+                <th>Service</th>
+                <th>Service Charge</th>
+                <th>Quantity</th>
+                <th>Total Charge</th>
+            </tr>
+            {% for item in cart.cartItems %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{item.service.name}}</td>
+                <td>Rs. {{item.service.serviceCharge}}</td>
+                <td>{{item.count}}</td>
+                <td>Rs.{{item.count * item.service.serviceCharge}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="4" align="right">Total Ammount : </td>
+                <td>Rs.{{cart.totalServiceCharge}}</td>
+            </tr>
+        </table>
+        <hr>
+        <div class="p-4 m-3 border rounded">
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" name="address" id="address" class="form-control form-control-sm" ng-model='address'>
+                <small class="text-muted">Labore sit proident amet voluptate veniam irure.</small>
+            </div>
+            <div class="form-group">
+                <label for="contact">Mobile Number</label>
+                <input type="number" name="contact" id="contact" class="form-control form-control-sm" ng-model='contact'>
+                <small class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt,
+                </small>
+            </div>
+            <div class="form-group d-flex mt-3">
+                <button class="btn btn-success btn-sm" ng-click='confirmOrder();'>Confirm Order</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+<script src="/customjs/user/maintenance-cart-info.js"></script>
+
+<script src='/reload/reload.js'></script>
+{% endblock %}

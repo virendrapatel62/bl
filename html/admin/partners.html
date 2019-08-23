@@ -1,0 +1,41 @@
+{% extends 'header.html' %}
+
+
+
+{% block content %}
+<div class="" ng-app='partners' ng-controller='partnersController'>
+    <div class="mx-auto p-3">
+        <table class="table display table-striped" id='datatable'>
+            <thead>
+                <tr>
+                    <th>Sno.</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>City</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat='p in partners.data'>
+                    <td>[[$index]]</td>
+                    <td>[[p.name]]</td>
+                    <td>[[p.email]]</td>
+                    <td>[[p.contact]]</td>
+                    <td>[[p.city.name]]</td>
+                    <td title="[[p.address]]">[[p.address.toString().substring(0 , 10)]]....</td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block scripts%}
+<script src="/customjs/admin/partners.js"></script>
+<link rel="stylesheet" href="/customcss/admin/partner.css">
+{% endblock %}

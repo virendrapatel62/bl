@@ -1,0 +1,87 @@
+{% extends '../header_footer_template.html' %}
+
+{% block content %}
+
+
+<div class="container-fluid" ng-app='serviceProvidersApp' ng-controller='serviceProvidersController'>
+
+    <!-- loading model -->
+
+    <div id="loadingModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard='false' data-backdrop='false'>
+        <div class="modal-dialog modal-dialog-centered" role="document" >
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="d-flex p-3">
+        <div class="input-group col-lg-6 mx-auto input-group-sm">
+            <input class="form-control" type="text" id='address' placeholder="Enter Location" aria-label=""
+                aria-describedby="">
+            <div class="input-group-append">
+                <span class="input-group-text hand" id="search" ng-click='search();'>Search</span>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4" ng-init="init( '{{lat}}' , '{{lng}}' , '{{subservice}}' )" id='data'>
+        <div class="col-lg-4 p-2" ng-repeat='sp in serviceProviders'>
+            <div class="m-3 p-3 bg-white rounded shadow">
+                <table class="table table-sm">
+                    <tr>
+                        <th>Service Provider</th>
+                        <td>[[sp.partner.name]]</td>
+                    </tr>
+                    <tr>
+                        <th>Address</th>
+                        <td>[[sp.partner.address]]</td>
+                    </tr>
+                    <tr>
+                        <th>City</th>
+                        <td>[[sp.partner.city.name]]</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>[[sp.partner.email]]</td>
+                    </tr>
+                    <tr>
+                        <th>Mobile</th>
+                        <td>[[sp.partner.contact || 'not available']]</td>
+                    </tr>
+                    <tr>
+                        <th>Distance </th>
+                        <td><span class="badge badge-info">[[sp.distance]] KM</span></td>
+                    </tr>
+
+                </table>
+                <hr class="bg-success">
+                <div class="d-flex">
+                    <a href="/user/maintenance/show-cart/[[sp.partner._id]]" class="btn btn-sm btn-outline-success m-1"
+                        ng-click='book();'>Book</a>
+                    <a href="javascript:void(0);" ng-click='openInMap();'
+                        class="btn btn-sm btn-outline-warning text-dark m-1">See On Map <i
+                            class="fa fa-external-link"></i></a>
+                    <a href="javascript:void(0);" class="btn btn-sm btn-outline-info m-1">More Info</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="/customjs/user/maintenance-service-providers.js"></script>
+<link rel="stylesheet" href="/customcss/user/maintenance-service-providers.css">
+<script src="/reload/reload.js"></script>
+<!-- maintenanceServicePrivereds -->
+{% endblock %}

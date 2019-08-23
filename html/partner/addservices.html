@@ -1,0 +1,43 @@
+{% extends '../header_footer_template.html' %}
+
+{% block content %}
+<br>
+<div class="container-fluid border rounded p-4" ng-app='addServicesApp' ng-controller='addServicesController'>
+    <!-- <h2 class="alert alert-info">Add Services</h2> -->
+    <div class="col-lg-11  mx-auto">
+        <h3 class="alert alert-light test-dark border bg-light rounded">Select Services ! What Will You Serve ....</h3>
+    </div>
+    <div class="col-lg-11 mx-auto border rounded p-3 m-3">
+        <div class="p-3">
+
+            <div class="custom-control custom-checkbox" ng-repeat='core in coreServices'>
+                <hr>
+                <input class="custom-control-input" type="checkbox" value="" id="[[core._id]]" ng-init='check = this.core.checked' ng-model='check' 
+                    ng-change='getSubServices("[[core._id]]" , $index , "abcd")' >
+                <label class="custom-control-label" for="[[core._id]]">
+                    [[core.name]]
+                </label>
+                <hr>
+                <div class="custom-control custom-checkbox" ng-repeat='sub in core.subservices'>
+                    <input class="custom-control-input" type="checkbox" value="" id="[[sub._id]]" ng-init='subcheck=this.sub.checked' ng-model='subcheck' ng-change='saveService("[[sub._id]]" , "[[core._id]]" , $event );'>
+                    <label class="custom-control-label" for="[[sub._id]]">
+                        [[sub.name]]
+                    </label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/reload/reload.js"></script>
+<script src="/customjs/partner/addservices.js"></script>
+
+<style>
+    .custom-control-label {
+        font-size: 18px;
+    }
+</style>
+{% endblock %}

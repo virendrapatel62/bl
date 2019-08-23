@@ -1,0 +1,19 @@
+{% extends '../header_footer_template.html' %}
+
+{% block content %}
+<br>
+<div class="p-2 m-3">
+    {% if locals.partner.status=='pending' %}
+    <h4 class="alert alert-info">Your Application Is Under Review please Visit After some time</h4>
+    {% endif %}
+    {% if completeProfile %}
+    <a href='/partner/addservices'><h4 class="alert alert-warning">Please Update Some services in Your Profile</h4></a>
+    {% endif %}
+
+    
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+{% endblock %}

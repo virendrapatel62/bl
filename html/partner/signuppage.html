@@ -1,0 +1,109 @@
+{% extends '../header_footer_template.html' %} {% block content %}
+
+<div class="container">
+    <div class="col-lg-4  p-4">
+        <div class="shadow p-4 rounded">
+            <div>
+                <h4 class="alert alert-success">Join Us - Partner Signup</h4>
+            </div>
+
+            <p class="alert alert-warning" id='errorMessage' hidden>Error message</p>
+            <form action="/signup/partner" method="post" enctype="multipart/form-data" id='partnerform'>
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Name</span>
+                    </div>
+                    <input type="text" name="username" id="name" class="form-control">
+                </div>
+                <div class="input-group input-group-sm mt-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Contact</span>
+                    </div>
+                    <input type="number" name="contact" id="contact" class="form-control">
+                </div>
+
+                <div class="input-group mt-3 input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Email</span>
+                    </div>
+                    <input type="email" name="email" id="email" class="form-control">
+                </div>
+                <div class="input-group mt-3 input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Password</span>
+                    </div>
+                    <input type="password" name="password" id="password" class="form-control">
+                </div>
+
+                <div class="input-group mt-3 input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Re enter Password</span>
+                    </div>
+                    <input type="password" name="repassword" id="repassword" class="form-control">
+                </div>
+
+                <div class="input-group mt-3 input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Address</span>
+                    </div>
+                    <input type="text" name="address" id="address" class="form-control">
+
+
+                </div>
+                <small class="text-muted p-1">Please select Address From Suggetions</small>
+
+                <input type="text" name="lat" hidden>
+                <input type="text" name="lng" hidden>
+                <div class="input-group mt-3 input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">State</span>
+                    </div>
+                    <select name="state" id="state" class="form-control form-control-sm" required>
+                        <option value="0">Select State</option>
+                        {% for state in states %}
+                        <option value="{{state.id}}">{{state.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="input-group mt-3 input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">City</span>
+                    </div>
+                    <select name="city" id="city" class="form-control form-control-sm" required>
+                        <option value="0">Select City</option>
+                        {% for city in cities %}
+                        <option value="{{city.id}}">{{city.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
+                <div class="input-group mt-3 input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Upload Id Proof</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" accept="image/x-png,image/gif,image/jpeg" class="custom-file-input" id="inputGroupFile01" name='idproof'>
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                </div>
+                <small class="text-muted p-1">Upload an ID Proof ; it may be aadhar card , Pan Card , driving licence
+                </small>
+
+                <div class="fomr-group mt-3">
+                    <input type="submit" value="Signup" class="btn btn-light border form-control btn-sm">
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %} {% block scripts %}
+<script src="/reload/reload.js"></script>
+<script src="/customjs/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="/customcss/jquery-ui.min.css">
+<script src="/customjs/partner/signuppage.js"></script>
+{% endblock %}

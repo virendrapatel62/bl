@@ -1,0 +1,53 @@
+:root {
+    --bgcolor: #4B5259;
+    --color : white;
+    --sideBarSize : 200px;
+    --mainDivMargin : 210px;
+    --iframeMarginTop : 70px;
+}
+
+body{
+    background-color: rgba(224, 227, 230, 0.685)
+}
+
+iframe{
+    margin-top: var(--iframeMarginTop);
+    width:100%;
+    height: 100%;
+}
+.navbar{
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    background-color: var(--bgcolor);
+}
+.sidebar{
+    width: var(--sideBarSize);
+    position: fixed;
+    height: 100%;
+    /* border: 1px solid #333945; */
+    background-color: var(--bgcolor);
+    color: var(--color);
+    overflow-y:scroll;
+}
+.main{
+    margin-left: var(--mainDivMargin);
+}
+li{
+    cursor: pointer;
+    border: none;
+}
+.list-group ,.list-group-item{
+    padding: 8px;
+    text-align: left;
+    font-size : 14px;
+    background-color: var(--bgcolor); 
+    border:none;
+}
+.selected{
+    background-color: var(--color);
+    color: var(--bgcolor);
+}
+hr{
+    background-color: rgb(15, 14, 14)
+}

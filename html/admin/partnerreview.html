@@ -1,0 +1,105 @@
+{% extends '../header_footer_template.html' %} {% block content %}
+
+<div class="">
+    <div class="bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <h4 class="bg-light p-3">Application For Review</h4>
+
+                <table class="table">
+
+                    <!-- row 1  -->
+                    <tr>
+                        <td><b>Name</b></td>
+                        <td class="">{{partner.name}}</td>
+                    </tr>
+
+                    <!-- row 2 -->
+                    <tr>
+                        <td><b>Contact</b></td>
+                        <td>
+                            <table class="table table-sm">
+                                <tr class="">
+                                    <td><b>Email</b></td>
+                                    <td>{{partner.email}}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Phone</b></td>
+                                    <td>{{partner.contact}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- row 3 -->
+                    <tr>
+                        <td><b>Address</b></td>
+                        <td>
+                            <table class="table table-sm">
+                                <tr>
+                                    <td colspan="2">{{partner.address}}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>State</b></td>
+                                    <td>{{partner.state.name}}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>City</b></td>
+                                    <td>{{partner.city.name}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td><b>Id Proof </b></td>
+                        <td><img src="/file?img={{partner.idproof.path}}" alt="IDPROOF" class="border img img-fluid" id='idproof'></td>
+                    </tr>
+
+
+
+                </table>
+
+                <div class="border rounded m-3 p-2">
+                    <h5 class="">Responce To Partner</h5>
+                    <hr>
+                    <div class="row pl-4 pt-0 mt-0">
+                        <div class="m-3">
+                            <button class="btn btn-success" id='confirm' onclick="confirmPartner('{{id}}' , this)">Confirm</button>
+                        </div>
+                        <div class="m-3">
+                            <button class="btn btn-danger" id='decline' onclick='declinePartner("{{id}}" , this)'>Decline</button>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <h3 class="alert alert-danger">Sending email is pending ...</h3>
+                    <div class="border p-4 rounded">
+                        <form action="/partner_review_message" method="get">
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea name="message" id="message" rows="5" class="form-control"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Send Message To Partner" class="btn btn-success">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block scripts %}
+
+<link rel="stylesheet" href="/customcss/admin/partnerreview.css">
+<script src="/customjs/admin/partnerreview.js"></script>
+{% endblock %}

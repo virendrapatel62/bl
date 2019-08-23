@@ -1,0 +1,297 @@
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="/img/favicon.png" type="image/png">
+    <title>Buildovo</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/vendors/linericon/style.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendors/lightbox/simpleLightbox.css">
+    <link rel="stylesheet" href="/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="/vendors/nice-select/css/nice-select.css">
+    <link rel="stylesheet" href="/vendors/animate-css/animate.css">
+    <link rel="stylesheet" href="/vendors/popup/magnific-popup.css">
+    <link rel="stylesheet" href="/css/hexagons.min.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/customcss/jquery-ui.min.css">
+    <link rel="stylesheet" href="/css/jquery.dataTables.min.css">
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="/customcss/header.css">
+    <link href="/css/icon.css" rel="stylesheet">
+
+   
+</head>
+
+<body data-spy="scroll" data-target="#mainNav" data-offset="70">
+
+    <!-- login model -->
+    <div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="my-modal-title">Login First</h5>
+                    <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" onsubmit='loginFromModal(event);'>
+                        <div class="alert alert-warning" hidden id='loginModalError'>
+                            <span>Email or Password incorrect</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="login_modal_email">Email</label>
+                            <input id="login_modal_email" class="form-control form-control-sm" type="email"
+                                name="modalemail">
+                        </div>
+                        <div class="form-group">
+                            <label for="login_modal_password">password</label>
+                            <input id="login_modal_password" class="form-control form-control-sm" type="password"
+                                name="modalpassword">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-sm btn-outline-success form-control" value="Login">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="partnerloginModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="my-modal-title">Login First</h5>
+                    <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" onsubmit='partnerLoginFromModal(event);'>
+                        <div class="alert alert-warning" hidden id='loginModalError'>
+                            <span>Email or Password incorrect</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="partner_login_modal_email">Email</label>
+                            <input id="partner_login_modal_email" class="form-control form-control-sm" type="email"
+                                name="partnermodalemail">
+                        </div>
+                        <div class="form-group">
+                            <label for="partner_login_modal_password">password</label>
+                            <input id="partner_login_modal_password" class="form-control form-control-sm" type="password"
+                                name="partnermodalpassword">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-sm btn-outline-success form-control" value="Login">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--================Header Menu Area =================-->
+    <header class="header_area ">
+        <div class="main_menu same-bg" id="mainNav">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <a class="navbar-brand logo_h" href="index.html"><img src="/img/logo.png" alt="" height="45px;"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav menu_nav ml-auto">
+                            <li class="nav-item active"><a class="nav-link" href="/">HOME</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/#feature">FEATURES</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/#services">SERVICES</a>
+
+                                <!--
+								<li class="nav-item submenu dropdown">
+									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
+									<ul class="dropdown-menu">
+										<li class="nav-item"><a class="nav-link" href="elements.html">Elements</a></li>
+									</ul>
+								</li> 	
+                                -->
+                                <!-- ================BLOG MENU=================
+                                <li class="nav-item submenu dropdown">
+									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
+									<ul class="dropdown-menu">
+										<li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+										<li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
+									</ul>
+								</li>
+                                -->
+                            <li class="nav-item"><a class="nav-link" href="/career">CAREER</a>
+                            <li class="nav-item"><a class="nav-link" href="/about">ABOUT US</a>
+                            <li class="nav-item"><a class="nav-link" href="javascript:void(0);">
+                                    CONTACT</a></li>
+
+
+
+
+                            {% if locals.user %}
+                            <li class="nav-item  dropdown">
+                                <a class="nav-link dropdown-toggle" href="javascript:void(0);" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    {{locals.user.name}}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/user/profile">My Profile</a>
+                                    <a class="dropdown-item" href="/user/orders">Orders</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="/user/account-settings">Account Setting</a>
+                                    <a class="dropdown-item" href="/logout">Logout</a>
+                                </div>
+                            </li>
+                            {% elif locals.partner %}
+                            <li class="nav-item  dropdown">
+                                <a class="nav-link dropdown-toggle" href="javascript:void(0);" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    {{locals.partner.name}}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/partner/profile">My Profile</a>
+                                    <a class="dropdown-item" href="/partner/orders">Orders</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="/partner/account-settings">Account Setting</a>
+                                    <a class="dropdown-item" href="/logout">Logout</a>
+                                </div>
+                            </li>
+                            {% else %}
+                            <li class="nav-item"><a class="nav-link" href="/login">Login / Signup</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <br>
+
+
+    <!--================Header Menu Area =================-->
+
+    <!--================Contact Success and Error message Area =================-->
+    <div id="success" class="modal modal-message fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-close"></i>
+                    </button>
+                    <h2>Thank you</h2>
+                    <p>Your message is successfully sent...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals error -->
+
+    <div id="error" class="modal modal-message fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-close"></i>
+                    </button>
+                    <h2 id='title'>Sorry !</h2>
+                    <p id='message'> Something went wrong </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--================End Contact Success and Error message Area =================-->
+
+
+
+
+
+    <br><br><br> {% block content %} {% endblock %}
+
+
+    <!--================ start footer Area  =================-->
+    <footer class="bg-dark">
+        <hr>
+        <hr>
+
+        <div class="container bg-dark">
+
+            <p>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta deserunt perferendis sequi odit
+                exercitationem ut doloribus rerum in voluptas, porro voluptatibus odio, quod minima rem, aspernatur
+                accusamus ullam velit. Commodi.
+            </p>
+            <div class="row text-center">
+                {% for i in '1234' %}
+                <div class="col-lg-3">
+                    <h5>Some Text</h5>
+                    <p>
+                        Veniam tempor <br>
+                        deserunt id <br>
+                        quis anim <br>
+                        occaecat <br>
+                        nulla ea.
+                    </p>
+                </div>
+                {% endfor%}
+            </div>
+            <hr class="bg-light">
+            <div class="row text-light">
+                <div>
+                    <p>copyright &copy; Buildovo 2019</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--================ End footer Area  =================-->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/popper.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/stellar.js"></script>
+    <script src="/vendors/lightbox/simpleLightbox.min.js"></script>
+    <script src="/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+    <script src="/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+    <script src="/vendors/isotope/isotope-min.js"></script>
+    <script src="/vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="/js/jquery.ajaxchimp.min.js"></script>
+    <script src="/vendors/counter-up/jquery.waypoints.min.js"></script>
+    <script src="/vendors/counter-up/jquery.counterup.js"></script>
+    <script src="/js/mail-script.js"></script>
+    <script src="/vendors/popup/jquery.magnific-popup.min.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/reload/reload.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/customjs/jquery-ui.min.js"></script>
+    <script src="/js/jquery.dataTables.min.js"></script>
+    <script src="/customjs/header.js"></script>
+
+    <!-- <script src="js/theme.js"></script> -->
+
+    {% block scripts %} {% endblock %}
+</body>
+
+</html>

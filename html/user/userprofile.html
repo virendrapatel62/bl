@@ -1,0 +1,144 @@
+{% extends '../header_footer_template.html' %}
+{% block content %}
+<div class="container row p-2 m-4">
+    <div class="col-sm-4">
+        <ul class="nav flex-column nav-pills" id='profiletabs'>
+            <li class="nav-item">
+                <a href="#userdetail"  data-toggle="tab" class="nav-link active">User Details</a>
+            </li>
+            <li class="nav-item" >
+                <a  href="#manageaddress" data-toggle="tab" class="nav-link"> Manage Address</a>
+            </li>
+            <li class="nav-item" >
+                <a  href="#changepassword" data-toggle="tab" class="nav-link"> Change Password</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col">
+        <div class="tab-content">
+            <div class="tab-pane fade show active col-md-8" role="tabpanel" id="userdetail">
+                <form id='nameconform' action="profile/details">
+                    <div class="img-fluid text-center">
+                            <img src="../images/user.png" />
+                        </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input readonly disabled id='email' class="form-control" type="email" value="{{user.email}}" />
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input required minlength="3" maxlength="50" disabled id='name' name='name'  class="form-control" type="text" value="{{user.name}}" />
+                    </div>
+                    <div class="form-group">
+                        <label for="contact">Contact Number</label>
+                        <!--  -->
+                        <div class="input-group">
+                           <div class="row">
+                                <div class="input-group-prepend col-4">
+                                    <select name='code' disabled required class="form-control">
+                                        <option value="+91" >+91 (India)</option>
+                                        {% for country in countrycodes %}
+                                            <option value="{country{.code}}" >{{country.code}} ({{country.name}})</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <input disabled required minlength="10" id='contact' name='contact' class="col-8 form-control" type="number" value="{{user.contact}}" />
+                           </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-info changefields">Change Details</button>
+                    <button class="btn btn-info" type="submit">Update Information</button>
+                </form>
+            </div>
+            <div class="tab-pane fade col-md-8" id="manageaddress" role="tabpanel">
+                <form id='updateaddressform' action="profile/address">
+                    <div class="form-group">
+                        <label>State</label>
+                        <select id='states' disabled class="form-control" name="state" required >
+                            <option value="" > -- Select -- </option>
+                            {% for state in states %}
+                            <option 
+                            {% if (user.state.id==state.id) %}
+                            selected
+                            {% endif %}
+                            value="{{state.id}}" >{{state.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>City</label>
+                        <select disabled id="cityselection" class="form-control" name="city" required>
+                            <option value=""> -- Select -- </option>
+                            {% for city in cities %}
+                            <option 
+                            {% if (user.city.id==city.id) %}
+                            selected
+                            {% endif %}
+                            value="{{city.id}}" >{{city.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Zip Code</label>
+                        <input disabled class="form-control" placeholder="Not Provided" type="number" name="zipcode" required value="{{user.zipcode}}" />
+                    </div>
+                    <div class="form-group">
+                        <label>Locality</label>
+                        <input disabled class="form-control" placeholder="Not Provided" type="text" name="locality" required value="{{user.locality}}" />
+                    </div>
+                    <div class="form-group">
+                        <label>Landmark</label>
+                        <input disabled class="form-control" placeholder="Not Provided" type="text" name="landmark" 
+                        {% if 'landmark' in user and len(user.landmark)%}
+                            value="{{user.landmark}}" 
+                        {% endif %}    
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <textarea disabled required class="form-control" rows="3" minlength="10" maxlength="200" name="address">{{user.address}}</textarea>
+                    </div>
+                    <button type="button" class="btn btn-info changefields">Change Address</button>
+                    <button class="btn btn-info" type="submit">Update Address</button>
+                </form>
+            </div>
+            <div class="tab-pane fade col-md-8" id='changepassword'>
+                <form id='passwordupdateform' action="profile/updatepassword">
+                    <div class="form-group">
+                        <label>Old Password</label>
+                        <input minlength="8" required class="form-control" name="oldpassword" type="password" />
+                    </div>
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input minlength="8" required class="form-control" name="newpassword" type="password" />
+                        <small class="form-text text-muted">password must be of length 8</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input minlength="8" required class="form-control" name="confirmpassword" type="password" />
+                    </div>
+                    <button class="btn btn-info">Change Password</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<style>
+        textarea{
+            resize: none;
+        }
+        
+        input[disabled],input[readonly],select[disabled] {
+            cursor: not-allowed;
+        }
+        
+        button[type="submit"] {
+            display: none;
+        }
+
+</style>
+
+<script src="/customjs/user/userprofile.js"> </script>
+{% endblock %}

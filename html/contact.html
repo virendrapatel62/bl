@@ -1,0 +1,72 @@
+ {% extends 'header_footer_template.html' %}
+{% block content %}
+        <!--================Home Banner Area =================-->
+        <section class="banner_area">
+            <div class="banner_inner d-flex align-items-center">
+            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+				<div class="container">
+					<div class="banner_content text-center">
+						<div class="page_link">
+							<a href="index.html">Home</a>
+							<a href="contact.html">Contact</a>
+						</div>
+						<h2>Contact Us</h2>
+					</div>
+				</div>
+            </div>
+        </section>
+        <!--================End Home Banner Area =================-->
+        
+        <!--================Contact Area =================-->
+        <section class="contact_area p_120">
+            <div class="container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3668.63618909608!2d79.9334553!3d23.1469697!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3981ae11953e4813%3A0x5ed47710c0e66e3a!2sJabalpur+Incubation+Center!5e0!3m2!1sen!2sin!4v1559503046140!5m2!1sen!2sin" width="100%" height="600px" frameborder="0" style="border:0; margin-bottom: 40px;" allowfullscreen></iframe>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="contact_info">
+                            <div class="info_item">
+                                <i class="lnr lnr-home"></i>
+                                <h6>3rd Floor JIC, Katanga, Jabalpur, Madhya Pradesh, India</h6>
+                                <p></p>
+                            </div>
+                            <div class="info_item">
+                                <i class="lnr lnr-phone-handset"></i>
+                                <h6><a href="#">+91-9131910560</a></h6>
+                                <p>Mon to Fri 9am to 6 pm</p>
+                            </div>
+                            <div class="info_item">
+                                <i class="lnr lnr-envelope"></i>
+                                <h6><a href="#">infinitysolutions@jicjabalpur.org</a></h6>
+                                <p>Send us your query anytime!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter Subject">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <textarea class="form-control" name="message" id="message" rows="1" placeholder="Enter Message"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-right">
+                                <button type="submit" value="submit" class="btn submit_btn">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================Contact Area =================-->
+        
+{% endblock %}

@@ -1,0 +1,83 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./scroll.css">
+    <link rel="stylesheet" href="./dashboard.scss">
+    <script src="../js/jquery-3.2.1.min.js"></script>
+
+</head>
+
+<body>
+    <div class="">
+        <div class="sidebar">
+            <div class="profile mb-3">
+                <div class="">
+                    <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png"
+                        class="rounded mx-auto d-block" height="80px" alt="">
+                    <p class="text-center">virendra patel</p>
+                </div>
+            </div>
+            <hr>
+            <ul class="list-group">
+                <li class="list-group-item" onclick="load('/user')">HomePage</li>
+                <li class="list-group-item" onclick="load('/user/orders')">Ordes</li>
+                <li class="list-group-item " onclick="load('/testhtmls/sidebar.html')">OptionPage</li>
+                <li class="list-group-item" onclick='window.src = "http:\\/\\/google.com"'>Google</li>
+                <li class="list-group-item">link 5</li>
+                <li class="list-group-item">link 6</li>
+                <li class="list-group-item">Link 1</li>
+                <li class="list-group-item">Link 2</li>
+                <li class="list-group-item">linnk 3</li>
+                <li class="list-group-item">link 4</li>
+                <li class="list-group-item">link 5</li>
+                <li class="list-group-item">link 6</li>
+                <li class="list-group-item">Link 1</li>
+                <li class="list-group-item">Link 2</li>
+                <li class="list-group-item">linnk 3</li>
+                <li class="list-group-item">link 4</li>
+                <li class="list-group-item">link 5</li>
+                <li class="list-group-item">link 6</li>
+                <li class="list-group-item">Link 1</li>
+                <li class="list-group-item">Link 2</li>
+                <li class="list-group-item">linnk 3</li>
+                <li class="list-group-item">link 4</li>
+                <li class="list-group-item">link 5</li>
+                <li class="list-group-item">link 6</li>
+            </ul>
+        </div>
+        <div class="main">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="#">Buildovo Admin Panel</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <!-- <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
+                        </li>
+                        <li class="nav-item">
+                            <!-- <a class="nav-link" href="#">Features</a> -->
+                        </li>
+                        <li class="nav-item">
+                            <!-- <a class="nav-link" href="#">Pricing</a> -->
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            
+            <iframe src="http://localhost:3000" frameborder="0"></iframe>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function load(url) {
+        $('iframe').attr('src', "http://localhost:3000" + url);
+    }
+</script>

@@ -1,0 +1,212 @@
+{% extends '../header_footer_template.html' %}
+  
+
+{% block content %}
+<div class="containter-fluid" ng-app='ordersApp' ng-controller='ordersController'>
+    <div class="p-2 m-4">
+
+        <!-- model for order details .... -->
+        <!-- Button trigger modal -->
+        <div id="orderDetailModal" class="modal fade" tabindex=" -1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Order Information</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <div class="modal-body border">
+
+
+                        <div class="p-3">
+                            <div class="row border rounded p-2 mb-2">
+                                <div class="col-lg-6 col-md-6">
+                                    <h4>Order Date</h4>
+                                    <p>[[order.date | date: 'dd/MM/yyyy h:mm:ss a']]</p>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <h4 class="">Order Total</h4>
+                                    <p>Rs. [[order.totalServiceCharge]]/-</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <table class="table table-sm modal_table">
+                                <tr>
+                                    <th>Services </th>
+                                    <td>
+                                        <table class="table table-sm details_table">
+                                            <tr>
+                                                <th>Service</th>
+                                                <th>Service Charge</th>
+                                                <th>Quantity</th>
+                                                <th>Total</th>
+                                            </tr>
+                                            <tr ng-repeat='bd in order.bookingDetails'>
+                                                <td>[[bd.service.name]]</td>
+                                                <td>Rs. [[bd.serviceCharge]]</td>
+                                                <td>[[bd.quantity]]</td>
+                                                <td>Rs. [[bd.serviceCharge * bd.quantity ]]</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Service Provider</th>
+                                    <td>[[order.partner.name]]</td>
+                                </tr>
+                                <tr>
+                                    <th>Service Provide Email </th>
+                                    <td>[[order.partner.email]]</td>
+                                </tr>
+                                <tr>
+                                    <th>Service Provide Address</th>
+                                    <td>[[order.partner.address]]</td>
+                                </tr>
+
+                            </table>
+                            <hr>
+                            <!-- Billing -->
+                            <div class="p-3 border border-info rounded row">
+                                <div class="col-lg-5 col-md-5">
+                                    <h4>Billing Address</h4>
+                                    <h5>[[order.user.name]]</h5>
+                                    <p>[[order.address]]<br>
+                                        Mobile : [[order.contact]]</p>
+                                </div>
+                                <div class="col-lg-5 col-md-5">
+                                    <h4>Order Summary</h4>
+                                    <table width='100%'>
+                                        <tr class="p-2">
+                                            <th class="p-2">Total Services</th>
+                                            <td>[[order.totalServices]]</td>
+                                        </tr>
+                                        <tr class="p-2">
+                                            <th class="p-2">Total Amount</th>
+                                            <td>Rs. [[order.totalServiceCharge]]/-</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="m-2 p-2 border rounded" id='cancleOrderreasonBox' hidden>
+                                <div class="form-group">
+                                    <textarea name="cancel_reason" ng-model='cancel_reason'
+                                        placeholder="Give a Reason for Cancalation" id="cancel_reason"
+                                        class="form-control"></textarea>
+                                    <input type="button" class="btn btn-danger btn-sm mt-3" value="Cancel Order"
+                                        ng-click='cancleOrder()'>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row">
+
+                                <!-- show when order is pending -->
+                                <div class="p-2" ng-show="order.bookingStatus=='Pending' ||  order.bookingStatus=='Confirmed'">
+                                    <button type="button" class="btn btn-sm btn-outline-success"
+                                        ng-click='markCompleted()'>Mark Order
+                                        Completed <i class="material-icons">done</i></button>
+                                </div>
+
+                                <!-- shows when order is completed  -->
+                                <div class="p-2" ng-show="order.bookingStatus=='Completed'">
+                                    <button type="button" disabled class="btn btn-sm btn-outline-success">
+                                        Order Completed <i class="material-icons">done_all</i></button>
+                                </div>
+
+                                <!-- show when order is Pending -->
+                                <div class="p-2"
+                                    ng-hide="order.bookingStatus=='Completed' || order.bookingStatus=='Canceled' "
+                                    ng-click='showCancelBox($event);' id='cancelOrder'>
+                                    <button type="button" class="btn btn-outline-danger btn-sm">Cancel Order <i
+                                            class="material-icons">cancel</i></button>
+                                </div>
+
+                                <!-- Shows when Order is canceled -->
+                                <div class="p-2" ng-show="order.bookingStatus=='Canceled' "
+                                    ng-click='showCancelBox($event);'>
+                                    <button type="button" disabled class="btn btn-outline-danger btn-sm">Order Canceled
+                                        <i class="material-icons">cancel</i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Body
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  end model for order details .... -->
+        <h4 class="m-4 border alert bg-light">Order Summary</h4>
+        <div class="p-3 border rounded">
+            <table class="table table-sm table-hover table-responsive-md table-responsive-sm  mx-auto" id='ordertable'>
+                <thead class="">
+                    <tr class="mb-2">
+                        <th>Sno.</th>
+                        <th>Services</th>
+                        <th>Total Charge</th>
+                        <th>Order status</th>
+                        <th colspan="">Date</th>
+                        <th colspan=""></th>
+                    </tr>
+                </thead>
+                <tbody class="">
+                    {% for o in maintenanceOrders %}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>
+                            <ol class="">
+                                {% for service in o.services %}
+                                <li class="">{{service.name}}</li>
+                                {% endfor %}
+                            </ol>
+                        </td>
+                        <td>Rs. {{o.totalServiceCharge}}/-</td>
+                        <td>{{o.bookingStatus}}</td>
+                        <td title="{{o.date | date('d/m/Y g:i a')}}">
+                            {{String(o.date | date('d/m/Y g:i a')).slice(0 , 8)}}...</td>
+                        <td>
+                            <a href="javascript:void(0)" class="btn btn-sm btn-outline-info"
+                                ng-click="showOrderDetails('{{o._id.toString()}}' , $event)">
+                                View Details
+                                <span class="spinner-border spinner-border-sm" hidden role="status"
+                                    aria-hidden="true"></span>
+
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- users___orders.html -->
+<script src="/customjs/user/orders.js"></script>
+<link rel="stylesheet" href="/customcss/user/orders.css">
+<!-- user orders.html -->
+{% endblock %}

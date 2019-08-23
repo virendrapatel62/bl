@@ -1,0 +1,32 @@
+<!-- sub-maintenance-service.html -->
+{% extends '../header_footer_template.html' %}
+<!-- sub-maintenance-service.html -->
+{% block content %}
+    <div class="p-2 m-4 border rounded">
+        <div class="row">
+            {% for service in services %}
+                <div class="col-lg-4 mx-auto p-3">
+                    <div class="mx-auto p-4">
+                        <div class="mx-auto text-center shadow rounded item" id='{{service._id.toString()}}' onclick='openNextPage("{{service._id.toString()}}")'>
+                            <img src="/file?img={{service.image}}" class="img img-fluid img-rounded" alt="">
+                            <hr class="p-0 m-0">
+                            <h4 class="p-2 m-2">{{service.name}}</h4>
+                            <hr class="bg-info" style="padding: 1px;">
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block scripts %}
+<style>
+        .item {
+            cursor: pointer;
+        }
+</style>
+<script src="/customjs/user/sub-maintenance-service.js"></script>
+<!-- sub-maintenance-service.html -->
+{% endblock %}

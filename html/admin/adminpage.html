@@ -1,0 +1,288 @@
+{% extends '../header_footer_template.html' %} {% block content %}
+<br>
+<div class="p-4">
+    <!-- Loading modal  -->
+    <div class="modal loading" style="position: absolute;top: 100px;">
+        <img class="mx-auto mt-4 pt-4 rounded mx-auto d-block"
+            src="https://gifimage.net/wp-content/uploads/2017/09/ajax-loading-gif-transparent-background-8.gif"
+            height="100px" width="100px" alt="">
+    </div>
+    <!-- ===================== Start partneer review div ================================= -->
+
+    <div id='partnerReviewDiv' class="border rounded">
+        <div>
+            <h4 class="alert alert-success">Partner Applications</h4>
+        </div>
+
+        {% if size==0 %}
+        <h4 class="alert-alert-info text-center display-4 border p-3 m-4 rounded">No Partners to Review...</h4>
+        {% endif %}
+        {% if size!=0 %}
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>State</th>
+                        <th>City</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in pending %}
+                    <tr onclick="showDetails('{{p.id}}');">
+                        <td>{{p.name}}</td>
+                        <td>{{p.email}}</td>
+                        <td>{{p.contact}}</td>
+                        <td>{{p.state.name}}</td>
+                        <td>{{p.city.name}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+
+    </div>
+
+    <!-- ===================== end partneer review div ================================= -->
+
+    <!-- Start Add Category Div -->
+
+    <hr class="bg-success m-4">
+    <h3 class="alert alert-success">Add Core Service </h3>
+    <div id='addServiceDiv' class="row m-4 border rounded p-4" ng-app='addserviceapp'
+        ng-controller='addserviceController as asc'>
+
+        <div class="col-lg-6 col-md-6">
+            <form action="javascript:void(0);" class="p-4 col-lg-8 mx-auto  rounded shadow">
+                <h4 class="alert alert-info">Add Service</h4>
+                <div class="form-group">
+                    <label for="">Service Title</label>
+                    <input type="text" name="title" id="title" class="form-control"
+                        placeholder="Construction , material" ng-model='asc.serviceTitle'>
+                </div>
+                <div class="form-group">
+                    <!-- <label for="">Service Title</label> -->
+                    <input type="submit" class="form-control btn btn-outline-success" ng-click='asc.addService();'>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-6 col-md-6">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Sno.</th>
+                        <th>ID</th>
+                        <th>Title</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat='service in asc.services'>
+                    <td>[[$index+1]] </td>
+                    <td>[[service._id]] </td>
+                    <td>[[service.name]]</td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+    <!-- end Add Category Div -->
+
+    <!-- Add Sub categories -->
+    <hr class="bg-success">
+    <h3 class="alert alert-success">Add Sub Service </h3>
+    <div class="m-4" ng-app='addSubServiceApp' id='addSubServiceApp' ng-controller='addSubServiceController as ssc'>
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <form action="javascript:void(0);" class="shadow p-3 m-4 col-lg-8 mx-auto" id='subserviceform'
+                    enctype="multipart/form-data" method="POST" ng-submit='ssc.saveSubservice($event  , this);'>
+                    <div class="form-group">
+                        <label for="">Select Core Service</label>
+                        <select name="coreservice" id="" class="form-control" required ng-model='ssc.core'>
+                            <option value="0" selected>Select Core Service</option>
+                            <option ng-repeat='core in ssc.coreServices' value="[[core._id]]">[[core.name]]</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Sub Service Categrory</label>
+                        <input type="text" name="title" id="title" required placeholder="Plumber , Cement"
+                            ng-model='title' class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Select An Image</label>
+                        <input type="file" name="file" id="file" required file-model='ssc.image' class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <!-- <label for="">Select An Image</label> -->
+                        <input type="submit" class="form-control btn btn-outline-success">
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <div class="p-2 border rounded">
+                    <h4 class="alert alert-success">All Sub Services</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Sno.</th>
+                                <th>Core Service</th>
+                                <th>Sub Service</th>
+                                <th>Sub Service ID</th>
+                            </tr>
+                            <tr ng-repeat='sub in subservices'>
+                                <td>[[$index+1]]</td>
+                                <td>[[sub.coreservice.name]]</td>
+                                <td>[[sub.name]]</d>
+                                <td>[[sub._id]]</td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end Add Sub categories -->
+    <!-- Start maintenanceServicesApp Subservice app -->
+    <hr class="bg-success m-3">
+    <h4 class="alert alert-warning">Add Maintenance Services</h4>
+
+
+    <div class="border p-3" id='maintenanceServicesApp' ng-app='maintenanceServicesApp'
+        ng-controller='maintenanceServicesController as msc'>
+
+        <!-- Update model  -->
+        <div class="modal fade" id="updateMaintenanceSubServiceModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content"  role="document">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Update Maintenance SubService</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div>
+                            <div class="form-group">
+                                <label for="title">service ID</label>
+                                <input type="text" name="subservicetitle" readonly id="title" ng-model='updateObject._id'
+                                    class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Sub Service Title</label>
+                                <input type="text" name="subservicetitle" id="title" ng-model='updateObject.name'
+                                    class="form-control" ng-keyup='updateOnKeyPress($event)'>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="updatedes">Description</label>
+                                <textarea name="" id="" rows="5" ng-model='updateObject.description'
+                                class="form-control"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="prize">Service Charge</label>
+                                <input type="number" name="serviceCharge" id="serviceCharge"
+                                    ng-model='updateObject.serviceCharge' class="form-control" ng-keyup='updateOnKeyPress($event)'>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click='update()'>Update</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- end update model -->
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <form action="#" class="shadow p-3 m-4 col-lg-8 mx-auto" id='maintenaceServiceForm'
+                    enctype="multipart/form-data" method="POST" ng-submit='saveSubservice($event  , this);'>
+                    <div class="form-group">
+                        <label for="">Select Service</label>
+                        <select name="maintenanceService" id="" class="form-control" required
+                            ng-model='maintenaceService'>
+                            <option value="0">Select Service</option>
+                            <option ng-repeat='service in services' value="[[service._id]]">[[service.name]]</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Sub Service Title</label>
+                        <input type="text" name="title" id="title" required placeholder="Tub repairing , wire fitting"
+                            ng-model='title' class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Description</label>
+                        <textarea name="description" id="description" class="form-control" ng-model='description'
+                            required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Select An Image</label>
+                        <input type="file" name="image" id="m_file" required file-model='ssc.image'
+                            class="form-control">
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <!-- <label for="">Select An Image</label> -->
+                        <input type="submit" class="form-control btn btn-outline-success">
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <div class="p-2 border rounded">
+                    <h4 class="alert alert-success">All Maintenance Services</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Sno.</th>
+                                <th>Core Service</th>
+                                <th>Sub Service</th>
+                                <th>Sub Service ID</th>
+                                <th>Service Charge</th>
+                            </tr>
+                            <tr title="Click To Edit..." ng-click='openUpdateModel([[msub]])' class="hand" ng-repeat='msub in MaintenaceSubServices'>
+                                <td>[[$index+1]]</td>
+                                <td>[[msub.coreService.name]]</td>
+                                <td>[[msub.name]]</d>
+                                <td>[[msub._id]]</td>
+                                <td>Rs. [[msub.serviceCharge]]</td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="bg-success m-3">
+
+</div>
+
+
+{% endblock %} {% block scripts %}
+<script src="/reload/reload.js"></script>
+<script src="/js/angular.min.js"></script>
+<script src="/customjs/admin/adminpage.js"></script>
+<style>
+.hand{
+    cursor: pointer;
+    transition: background-color 400ms , box-shadow 500ms
+}
+.hand:hover{
+    background-color: rgb(240, 235, 235);
+    box-shadow: 2px 5px 10px rgb(223, 219, 219)
+}
+</style>
+<link rel="stylesheet" href="/customcss/admin/adminpage.css">
+
+{% endblock %}

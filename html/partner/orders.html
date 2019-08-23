@@ -1,0 +1,71 @@
+{% extends '../header_footer_template.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="/customcss/partner/orders.css">
+
+<div class="container-fluid" ng-app='ordersApp' ng-controller='ordersController'>
+    <div class="p-3">
+        <h4 class="m-4 border alert bg-light">Order Summary</h4>
+        <div class="p-2 border rounded">
+            <table id="ordertable" class="table table-sm table-hover table-responsive-sm table-responsive-md mx-auto">
+                <thead class="">
+                    <tr class="mb-2">
+                        <th>Sno.</th>
+                        <th>Cusomer</th>
+                        <th>Mobile</th>
+                        <th>Address</th>
+                        <th>Services</th>
+                        <th>Total Charge</th>
+                        <th colspan="1">Date</th>
+                        <th>Order Status</th>
+                    </tr>
+                </thead>
+                <tbody class="">
+                    {% for o in maintenanceOrders %}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{o.user.name}}</td>
+                        <td>{{o.contact}}</td>
+                        <td>{{o.address}}</td>
+                        <td>
+                            <ol class="innerlist">
+                                {% for service in o.services %}
+                                <li class="">{{service.name}}</li>
+                                {% endfor %}
+                            </ol>
+                        </td>
+                        <td>Rs. {{o.totalServiceCharge}}/-</td>
+                        <td title="{{o.date | date('d/m/Y g:i a')}}">
+                            {{String(o.date | date('d/m/Y g:i a')).slice(0 , 8)}}...</td>
+                        <td>
+                            {% if o.bookingStatus == bookingStatuses.pending %}
+                            <a href="javascript:void(0)" class="btn btn-sm btn-outline-primary table-button"
+                                ng-click="ConfirmOrder('{{o._id.toString()}}' , $event)">
+                                Approve Order
+                                <span class="spinner-border spinner-border-sm" hidden role="status"
+                                    aria-hidden="true"></span>
+
+                            </a>
+                            {% elseif  o.bookingStatus == bookingStatuses.confirmed %}
+                            <span class="text-info">Confirmed By You</span>
+                            {% elseif  o.bookingStatus == bookingStatuses.canceled %}
+                            <span class="text-danger">Canceled</span>
+                            {%  elseif o.bookingStatus == bookingStatuses.completed %}
+                            <span class="text-success">completed</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+
+<script src="/customjs/partner/orders.js"></script>
+<!-- Partner orders.html -->
+{% endblock %}

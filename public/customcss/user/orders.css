@@ -1,0 +1,21 @@
+table{
+    font-size: 14px;
+    cursor: pointer;
+}
+ol{
+    font-size: 12px;
+}
+b{
+    color: #706A6A
+}
+
+.modal_table th{
+    color: #706A6A
+}
+.details_table ,  th ,  td ,  tr{
+    font-size: 12px;
+    border-color: white;
+}
+.material-icons{
+    vertical-align: middle;
+}

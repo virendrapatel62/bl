@@ -1,0 +1,8 @@
+#idproof {
+    transition: transform 1s;
+    cursor: pointer;
+}
+
+b {
+    color: black
+}

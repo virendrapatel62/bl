@@ -1,0 +1,8 @@
+git add .
+git commit -m 'name'
+git push heruko master
+
+
+
+
+set DEBUG=userAuthMiddleware,partnerAuthMiddleware,login,index,signup,common,admin,userhome,addservices,homepage,city,state,partner,user,user:maintenance-router,common.js:Router,User-orders:router
