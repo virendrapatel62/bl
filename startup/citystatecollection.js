@@ -19,9 +19,6 @@ async function ab() {
 }
 let sttt = 1;
 let ctt = 1;
-
-
-
 async function save(name, cities) {
     const state = new State({
         name: name
@@ -39,13 +36,9 @@ async function save(name, cities) {
         logger(" City :  " + ctt++);
     }
 }
-
-
-
 async function cheak() {
     const count = await State.find().select().count();
     logger("State count :  "+ count);
-
     if (count ==  0){
         logger('saving states now...');
         
@@ -53,4 +46,8 @@ async function cheak() {
         ab();
     }
 }
+
+
+// checked weather city and state data is in database or not 
+// if not it save the data
 cheak();

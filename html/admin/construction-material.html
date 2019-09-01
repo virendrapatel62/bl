@@ -4,279 +4,413 @@
 
 {% block content %}
 
-<!-- category App -->
-<h4 class="p-3">
-    <!-- <p class="alert alert-success">Add Construction Materials</p> -->
-</h4>
-<div class="" ng-app='app' id='materials' ng-controller='Controller'>
-    <div class="">
-        <div class="form rounded shadow m-4">
-            <div class="alert alert-success border">
-                <h4>Add Construction Material</h4>
-                <!-- <hr> -->
-            </div>
-            <form action="javascript:void(0);" id='productForm' enctype="multipart/form-data" class=' p-3 row'
-                ng-submit='saveProduct($event);'>
-                <div class="form-group mt-2 col-lg-4">
-                    <label for="Product Name" class="">Product Name</label>
-                    <input type="text" name="name" id="product" class="form-control form-control-sm"
-                        placeholder="Product Name" required>
-                </div>
-                <div class="form-group mt-2 col-lg-4">
-                    <label for="description" class="">Description</label>
-                    <textarea type="text" name="description" id="description" class="form-control form-control-sm"
-                        placeholder="Description"></textArea>
-                </div>
-                <div class="form-group mt-2  col-lg-4">
-                    <label for="unit" class="">Unit</label>
-                    <input type="text" name="unit" id="unit" required class="form-control form-control-sm"
-                        placeholder="Unit">
-                </div>
 
-                <div class="input-group mb-3  col-lg-4 input-group-sm" ng-repeat='n in sizeCount'>
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="">Size</span>
-                    </div>
-                    <input type="text" class="form-control" ng-blur='test();' name='size' ng-model='sometest'
-                        value="some" multiple placeholder="Kg , Fit">
+<div class="m-2">
 
-                    <!-- <button ng-click="test();">test</button> -->
-                    <div class="input-group-append">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#add-product" role="tab" aria-controls="home"
+                aria-selected="true">Add Product</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#add-brand" role="tab" aria-controls="profile"
+                aria-selected="false">Add Brands</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#add-size" role="tab" aria-controls="contact"
+                aria-selected="false">Add Sizes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#add-verient" role="tab" aria-controls="contact"
+                aria-selected="false">Add Verients</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <!-- add Product Tab -->
+        <div class="tab-pane fade show active" id="add-product" role="tabpanel">
+            <div class="" ng-app='app' id='materials' ng-controller='Controller'>
+                <div class="">
+                    <div class="form rounded shadow m-4">
+                        <div class="alert alert-success border">
+                            <h4>Add Construction Material</h4>
+                            <!-- <hr> -->
+                        </div>
+                        <form action="javascript:void(0);" id='productForm' enctype="multipart/form-data"
+                            class=' p-3 row' ng-submit='saveProduct($event);'>
+                            <div class="form-group mt-2 col-lg-4">
+                                <label for="Product Name" class="">Product Name</label>
+                                <input type="text" name="name" id="product" class="form-control form-control-sm"
+                                    placeholder="Product Name" required>
+                            </div>
 
-                        <span class="input-group-text" id="" ng-click='moreSize();'><i class="fa fa-plus"></i></span>
-                    </div>
-                </div>
+                            <!-- <div class="form-group mt-2  col-lg-4">
+                            <label for="unit" class="">Unit</label>
+                            <input type="text" name="unit" id="unit" required class="form-control form-control-sm"
+                                placeholder="Unit">
+                        </div> -->
+                            <!-- 
+                        <div class="input-group mb-3  col-lg-4 input-group-sm" ng-repeat='n in sizeCount'>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Size</span>
+                            </div>
+                            <input type="text" class="form-control" ng-blur='test();' name='size' ng-model='sometest'
+                                value="some" multiple placeholder="Kg , Fit">
+        
+                            <div class="input-group-append">
+        
+                                <span class="input-group-text" id="" ng-click='moreSize();'><i class="fa fa-plus"></i></span>
+                            </div>
+                        </div> -->
 
-                <div class="input-group mb-3  col-lg-8 input-group-sm" ng-repeat='n in varientCount'>
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="" name=''>Varients</span>
-                    </div>
-
-                    <!-- select Size -->
-                    <div class="input-group-append">
-                        <span class="input-group-text" id="">Size</span>
-                    </div>
-                    <select name="vareints_size" id="" class="form-control">
-                        <option ng-repeat='i in sizesArray track by $index' value="[[i]]">[[i]]</option>
-                    </select>
-
-                    <!-- enter varient -->
-                    <div class="input-group-append">
-                        <span class="input-group-text" id="">Varient</span>
-                    </div>
-                    <input type="text" class="form-control" name='vareints' placeholder="50 Kg , 250 sqrfit">
-                    <div class="input-group-append">
-                        <span class="input-group-text" id="">MRP</span>
-                    </div>
-
-                    <!-- enter MRP -->
-                    <input type="number" class="form-control" name='mrp' placeholder="250">
-
-                    <div class="input-group-append">
-                        <span class="input-group-text" id="">RS</span>
-                    </div>
-                    <div class="input-group-append">
-                        <span class="input-group-text" id="" ng-click='moreSizeVarient();'><i
-                                class="fa fa-plus"></i></span>
-                    </div>
-                </div>
-
-
-                <div class="form-group mt-2  col-lg-5">
-                    <label for="unit" class="">Select Images</label>
-                    <input type="file" name="photos" id="photos" required multiple class="form-control form-control-sm"
-                        placeholder="select File">
-                </div>
-                <div class="col-lg-12 row">
-                    <div class="form-group m-2">
-                        <input type="submit" value="Save Product" class="btn btn-success btn-sm">
-                    </div>
-                    <!-- on click this button will all products -->
-                    <div class="form-group m-2">
-                        <button ng-click='loadAllProducts();' class="btn btn-info btn-sm" style="vertical-align: middle" type="button">
-                            <span style="vertical-align: middle">Show All Products</span>
-                            <span class="spinner-border product-loading" hidden role="status" aria-hidden="true" style="vertical-align: middle"></span>
-                        </button>
-
-                        <!-- model for all products -->
-
-                        <div class="modal fade all-products-modal" tabindex="-1" role="dialog" aria-labelledby=""
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div>
-                                        <div class="alert alert-info">
-                                            <h4>All Products</h4>
-                                        </div>
-                                        <div class="p-2 m-2 border">
-                                            <table class="table table-sm table-bordered font-13">
-                                                <thead class="bg-light">
-                                                    <tr>
-                                                        <th>Sno.</th>
-                                                        <th>Name</th>
-                                                        <th>Description</th>
-                                                        <th>Unit</th>
-                                                        <th>Sizes</th>
-                                                        <th>Varients</th>
-                                                        <th>Sub Categories</th>
-                                                        <th>Brands</th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tr ng-repeat='p in allProducts'>
-                                                    <td>[[$index+1]]</td>
-                                                    <td>[[p.name]]</td>
-                                                    <td>[[p.description]]</td>
-                                                    <td>[[p.unit]]</td>
-                                                    <td>
-                                                        <p ng-repeat='s in p.size'>[[s]]</p>
-                                                    </td>
-                                                    <td>
-                                                        <table class="table table-sm font-13">
-                                                            <tr>
-                                                                <th>Varient</th>
-                                                                <th>MRP</th>
-                                                            </tr>
-                                                            <tr ng-repeat='v in p.varients'>
-                                                                <td>[[v.varient]]</td>
-                                                                <td>Rs. [[v.mrp]]</td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                    <td>
-                                                        <p ng-repeat='b in p.subcategory'>[[b.type]]</p>
-                                                    </td>
-                                                    <td>
-                                                        <p ng-repeat='b in p.brands'>[[b.title]]</p>
-                                                    </td>
-
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                            <!-- <div class="input-group mb-3  col-lg-8 input-group-sm" ng-repeat='n in varientCount'>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="" name=''>Varients</span>
+                            </div>
+        
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="">Size</span>
+                            </div>
+                            <select name="vareints_size" id="" class="form-control">
+                                <option ng-repeat='i in sizesArray track by $index' value="[[i]]">[[i]]</option>
+                            </select>
+        
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="">Varient</span>
+                            </div>
+                            <input type="text" class="form-control" name='vareints' placeholder="50 Kg , 250 sqrfit">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="">MRP</span>
+                            </div>
+        
+                            <input type="number" class="form-control" name='mrp' placeholder="250">
+        
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="">RS</span>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="" ng-click='moreSizeVarient();'><i
+                                        class="fa fa-plus"></i></span>
                             </div>
                         </div>
+                        
+         -->
+                            <div class="form-group col-lg-4">
+                                <label for="">Select Product Category</label>
+                                <select name="coreCategory" id="" class="form-control">
+                                    {% for i in coreCategories %}
+                                    <option value="{{i._id.toString()}}">{{i.title}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group mt-2 col-lg-4">
+                                <label for="description" class="">Description</label>
+                                <textarea type="text" name="description" id="description"
+                                    class="form-control form-control-sm" placeholder="Description"></textArea>
+                            </div>
+                            <div class="input-group mb-3 input-group-sm col-lg-5">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Select Images</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" name='photos' class="custom-file-input" multiple accept="Images"
+                                        id="pics">
+                                    <label class="custom-file-label" for="pics">Choose file</label>
+                                </div>
+                            </div>
 
-                        <!-- end model -->
+
+                            <!-- <div class="form-group mt-2  col-lg-5">
+                            <label for="unit" class="">Select Images</label>
+                            <input type="file" name="photos" id="photos" required multiple class="form-control form-control-sm"
+                                placeholder="select File">
+                        </div> -->
+                            <div class="col-lg-12 row">
+                                <div class="form-group m-2">
+                                    <input type="submit" value="Save Product" class="btn btn-success btn-sm">
+                                </div>
+                                <!-- on click this button will all products -->
+                                <div class="form-group m-2">
+                                    <button ng-click='loadAllProducts();' class="btn btn-info btn-sm"
+                                        style="vertical-align: middle" type="button">
+                                        <span style="vertical-align: middle">Show All Products</span>
+                                        <span class="spinner-border product-loading" hidden role="status"
+                                            aria-hidden="true" style="vertical-align: middle"></span>
+                                    </button>
+
+                                    <!-- model for all products -->
+
+                                    <div class="modal fade all-products-modal" tabindex="-1" role="dialog"
+                                        aria-labelledby="" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div>
+                                                    <div class="alert alert-info">
+                                                        <h4>All Products</h4>
+                                                    </div>
+                                                    <div class="p-2 m-2 border">
+                                                        <table class="table table-sm font-13">
+                                                            <thead class="bg-light">
+                                                                <tr>
+                                                                    <th>Sno.</th>
+                                                                    <th>Name</th>
+                                                                    <th>Description</th>
+                                                                    <th>Product ategory</th>
+                                                                </tr>
+                                                            </thead>
+
+                                                            <tr ng-repeat='p in allProducts'>
+                                                                <td>[[$index+1]]</td>
+                                                                <td>[[p.productName]]</td>
+                                                                <td>[[p.description]]</td>
+                                                                <td>[[p.productCategory.title]]</td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- end model -->
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </form>
+
+            </div>
+
         </div>
+
+        <div class="tab-pane fade" id="add-brand" role="tabpanel" aria-labelledby="profile-tab">
+            <!-- add Brands -->
+            <div class="m-3">
+                <div ng-app='brandApp' id='brandApp' ng-controller='brandController' class="shadow m-2">
+                    <div class="alert alert-success  border">
+                        <h4>Add Brands Of Construction Materials</h4>
+                        <!-- <hr> -->
+                    </div>
+
+
+                    <form action="javascript:void(0);" class="p-4 row" id='brandForm' enctype="multipart/form-data"
+                        ng-submit='saveBrand($event);'>
+                        <div class="input-group col-lg-5  mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Brand</span>
+                            </div>
+                            <input class="form-control" type="text" name="title" required>
+                        </div>
+                        <!-- product Category -->
+                        <div class="input-group col-lg-5  mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Product Category</span>
+                            </div>
+                            <select name="productCategory" class="form-control" ng-model='productCategory'
+                                ng-change='loadProducts();'>
+                                <option value="-1">-- Select --</option>
+                                {% for i in coreCategories %}
+                                <option value="{{i._id.toString()}}">{{i.title}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- product -->
+                        <div class="input-group col-lg-5  mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Product</span>
+                            </div>
+                            <select name="product" class="form-control" ng-model='product'
+                                ng-change='loadProductTypes();'>
+                                <option value="-1">-- Select --</option>
+                                <option ng-repeat='p in products' value="[[p._id]]">[[p.productName]]</option>
+                            </select>
+                        </div>
+
+
+
+
+                        <div class="input-group col-lg-8 mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Description</span>
+                            </div>
+                            <textarea name="description" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group mt-2  col-lg-5">
+                            <label for="unit" class="">Select Images</label>
+                            <input type="file" name="photos" id="photos" required multiple
+                                class="form-control form-control-sm" placeholder="select File">
+                        </div>
+
+                        <div class="form-group mt-2  col-lg-12">
+                            <input type="submit" class="form-control btn btn-sm btn-success col-lg-3" value="Save">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--  -->
+        </div>
+
+        <!-- Product Size Tab -->
+        <div class="tab-pane fade" id="add-size" role="tabpanel" aria-labelledby="contact-tab">
+            <!-- add product Size -->
+            <div class="m-3">
+                <div ng-app='productSizeApp' id='productSizeApp' ng-controller='productSizeController'
+                    class="shadow m-2">
+                    <div class="alert alert-success border">
+                        <h4>Add Construction Material Sizes</h4>
+                        <!-- <hr> -->
+                    </div>
+
+
+                    <form action="javascript:void(0);" class="p-4 row" id='productTypeForm'
+                        enctype="multipart/form-data" ng-submit='saveProductType($event);'>
+
+                        <!-- product Category -->
+                        <div class="input-group col-lg-5  mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Product Category</span>
+                            </div>
+                            <select name="productCategory" class="form-control" ng-model='productCategory'
+                                ng-change='loadProducts();'>
+                                <option value="-1">-- Select --</option>
+                                {% for i in coreCategories %}
+                                <option value="{{i._id.toString()}}">{{i.title}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <!-- product -->
+                        <div class="input-group col-lg-5  mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Product</span>
+                            </div>
+                            <select name="product" class="form-control" ng-model='product' ng-change='loadBrands();'>
+                                <option value="-1">Select Product</option>
+                                <option ng-repeat='p in products' value="[[p._id]]">[[p.productName]]</option>
+                            </select>
+                        </div>
+                        <!-- select Brand -->
+
+                        <div class="input-group col-lg-5  mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Brand</span>
+                            </div>
+                            <select name="brand" class="form-control">
+                                <option value="-1">Select Brand</option>
+                                <option ng-repeat='p in brands' value="[[p._id]]">[[p.brand]]</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group col-lg-5  mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Size</span>
+                            </div>
+                            <input class="form-control" type="text" name="size" required>
+                        </div>
+
+                        <div class="input-group col-lg-8 mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Description</span>
+                            </div>
+                            <textarea name="description" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group mt-2  col-lg-5">
+                            <label for="unit" class="">Select Images</label>
+                            <input type="file" name="photos" id="photos" multiple class="form-control form-control-sm"
+                                placeholder="select File">
+                        </div>
+
+                        <div class="form-group mt-2  col-lg-12">
+                            <input type="submit" class="form-control btn btn-sm btn-success col-lg-3" value="Save">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--  -->
+        </div>
+        <!-- tab end -->
+        <!-- add - verient tab start  -->
+        <div class="tab-pane fade" id="add-verient" role="tabpanel" aria-labelledby="contact-tab">
+            <!-- add product Size -->
+            <div class="m-3">
+                <div ng-app='productVerientApp' id='productVerientApp' ng-controller='productVerientController'
+                    class="shadow m-2">
+                    <div class="alert alert-success border">
+                        <h4>Add Construction Material Sizes</h4>
+                        <!-- <hr> -->
+                    </div>
+
+
+                    <form action="javascript:void(0);" class="p-4 row" id='productVarientForm'
+                        enctype="multipart/form-data" ng-submit='saveProductType($event);'>
+
+                        <!-- product Category -->
+                        <div class="input-group col-lg-5  mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Product Category</span>
+                            </div>
+                            <select name="productCategory" class="form-control" ng-model='productCategory'
+                                ng-change='loadProducts();'>
+                                <option value="-1">-- Select --</option>
+                                {% for i in coreCategories %}
+                                <option value="{{i._id.toString()}}">{{i.title}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <!-- product -->
+                        <div class="input-group col-lg-5  mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Product</span>
+                            </div>
+                            <select name="product" class="form-control" ng-model='product' ng-change='loadBrands();'>
+                                <option value="-1">Select Product</option>
+                                <option ng-repeat='p in products' value="[[p._id]]">[[p.productName]]</option>
+                            </select>
+                        </div>
+                        <!-- select Brand -->
+
+                        <div class="input-group col-lg-5  mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Brand</span>
+                            </div>
+                            <select name="brand" class="form-control">
+                                <option value="-1">Select Brand</option>
+                                <option ng-repeat='p in brands' value="[[p._id]]">[[p.brand]]</option>
+                            </select>
+                        </div>
+                        <!-- verient -->
+                        <div class="input-group col-lg-5  mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Varient</span>
+                            </div>
+                            <input class="form-control" type="text" name="varient" required>
+                        </div>
+
+                        <div class="input-group col-lg-8 mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Description</span>
+                            </div>
+                            <textarea name="description" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group mt-2  col-lg-5">
+                            <label for="unit" class="">Select Images</label>
+                            <input type="file" name="photos" id="photos" multiple class="form-control form-control-sm"
+                                placeholder="select File">
+                        </div>
+
+                        <div class="form-group mt-2  col-lg-12">
+                            <input type="submit" class="form-control btn btn-sm btn-success col-lg-3" value="Save">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--  -->
+
+        </div>
+        <!-- tab-end -->
     </div>
 
 </div>
-
-
-<hr>
-<!-- add product type -->
-<div class="m-3">
-    <div ng-app='productTypeApp' id='productTypeApp' ng-controller='productTypeController' class="shadow m-2">
-        <div class="alert alert-success border">
-            <h4>Add Construction Material Types</h4>
-            <!-- <hr> -->
-        </div>
-
-
-        <form action="javascript:void(0);" class="p-4 row" id='productTypeForm' enctype="multipart/form-data"
-            ng-submit='saveProductType($event);'>
-            <div class="input-group col-lg-5  mt-3 input-group-sm">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="">Type</span>
-                </div>
-                <input class="form-control" type="text" name="type" required>
-            </div>
-            <div class="input-group col-lg-5  mt-3 input-group-sm">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="">Product</span>
-                </div>
-                <select name="product" class="form-control">
-                    <option value="-1">Select Product</option>
-                    <option ng-repeat='p in products' value="[[p._id]]">[[p.name]]</option>
-                </select>
-            </div>
-            <div class="input-group col-lg-8 mt-3 input-group-sm">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="">Description</span>
-                </div>
-                <textarea name="description" class="form-control" required></textarea>
-            </div>
-            <div class="form-group mt-2  col-lg-5">
-                <label for="unit" class="">Select Images</label>
-                <input type="file" name="photos" id="photos" required multiple class="form-control form-control-sm"
-                    placeholder="select File">
-            </div>
-
-            <div class="form-group mt-2  col-lg-12">
-                <input type="submit" class="form-control btn btn-sm btn-success col-lg-3" value="Save">
-            </div>
-        </form>
-    </div>
-</div>
-<!--  -->
-
-
-<hr>
-<!-- add Brands -->
-<div class="m-3">
-    <div ng-app='brandApp' id='brandApp' ng-controller='brandController' class="shadow m-2">
-        <div class="alert alert-success  border">
-            <h4>Add Brands Of Construction Materials</h4>
-            <!-- <hr> -->
-        </div>
-
-
-        <form action="javascript:void(0);" class="p-4 row" id='brandForm' enctype="multipart/form-data"
-            ng-submit='saveBrand($event);'>
-            <div class="input-group col-lg-5  mt-3 input-group-sm">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="">Brand</span>
-                </div>
-                <input class="form-control" type="text" name="title" required>
-            </div>
-            <div class="input-group col-lg-5  mt-3 input-group-sm">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="">Product</span>
-                </div>
-                <select name="product" class="form-control" ng-model='product' ng-change='loadProductTypes();'>
-                    <option value="-1">-- Select --</option>
-                    <option ng-repeat='p in products' value="[[p._id]]">[[p.name]]</option>
-                </select>
-            </div>
-
-            <div class="input-group col-lg-5  mt-3 input-group-sm">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="">Product SubCategory</span>
-                </div>
-                <select name="productType" class="form-control" ng-model='productType'>
-                    <option value="-1">-- Select --</option>
-                    <option ng-repeat='p in productTypes' value="[[p._id]]">[[p.type]]</option>
-                </select>
-            </div>
-
-
-            <div class="input-group col-lg-8 mt-3 input-group-sm">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="">Description</span>
-                </div>
-                <textarea name="description" class="form-control"></textarea>
-            </div>
-            <div class="form-group mt-2  col-lg-5">
-                <label for="unit" class="">Select Images</label>
-                <input type="file" name="photos" id="photos" required multiple class="form-control form-control-sm"
-                    placeholder="select File">
-            </div>
-
-            <div class="form-group mt-2  col-lg-12">
-                <input type="submit" class="form-control btn btn-sm btn-success col-lg-3" value="Save">
-            </div>
-        </form>
-    </div>
-</div>
-<!--  -->
-
-
-
 <br>
 <br>
 <br>

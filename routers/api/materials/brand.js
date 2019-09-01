@@ -7,6 +7,11 @@ Router.get('/', async (req, res) => {
     res.send(result);
 })
 
+Router.get('/:id', async(req,res)=>{
+    const result = await Brand.findOne({_id:req.params.id}).populate('productCategory product')
+    res.send(result)
+})
+
 
 
 module.exports = Router

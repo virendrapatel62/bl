@@ -1,0 +1,50 @@
+{% extends "../base.html" %}
+{% block content %}
+<div class="container mx-auto mb-4 p-4" ng-app='partnerLoginApp' ng-controller='partnerLoginController'>
+    <div class="col-lg-4 col-md-6 p-4 ml-auto ">
+        <div class="shadow border-0 rounded p-0">
+            <div class="p-3 bg-success text-white same-bg w-100 mb-0">
+                <h3>Partner Login</h3>
+            </div>
+            <div class="p-3 m-3 mt-0 rounded">
+                <p class="alert alert-warning" ng-show='error'>[[error]]</p>
+                <form action="/login/partnerlogin" id='loginform' method="post">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text same-bg"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                        </div>
+                        <input type="email" placeholder="john@gmail.com" id='login_email' class="form-control rounded-input" name='email' ng-model='email' ng-keyup='emailBlur();'>
+                        <div class="invalid-feedback">
+                            Enter valid Email
+                        </div>
+                    </div>
+                    <div class="input-group mt-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text same-bg">&nbsp;<i class="fa fa-lock" aria-hidden="true"></i>&nbsp;
+                            </span>
+                        </div>
+                        <input type="password" placeholder="**********" id='login_password' class="form-control rounded-input" name='password' ng-model='password' ng-keyup='passwordBlur();'>
+                        <div class="invalid-feedback">
+                            Password must be 8 character long and must contain atleast 1 number
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="submit" id='login_button' ng-click='partnerLogin($event);' class="form-control same-bg btn " value="Login">
+                    </div>
+                    <div class="mt-2 text-center mt-3">
+                        <a href="/signup/joinusaspartner" class="form-control form-control-sm btn btn-outline-info"><small>New User ?
+                                create an account</small></a>
+                    </div>
+                    <div class="mt-2 text-center pointer border rounded" style="cursor: pointer">
+                        <a href="/login"><small class="mx-auto text-center hand">Login As Customer</small></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/reload/reload.js"></script>
+{% endblock %}
+{% block scripts %}
+<script src="/customjs/partner/partnerlogin.js"></script>
+{% endblock %}

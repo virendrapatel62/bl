@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{%block title%}Login Page{%endblock%}
+{% block content %}
+<div class="mx-auto p-lg-2" ng-app='userLoginApp' ng-controller='userLoginController'>
+    <div class="col-lg-8 col-sm-12 col-md-8 mx-auto">
+        <div class="d-flex justify-content-center">
+            <h1>Login</h1>
+        </div>
+        <!-- link set to your email  -->
+        <div class="p-4 mx-auto bg-white rounded border col-lg-10" id="linksent" hidden>
+            <a href="javascript:void(0);" ng-click='showLoginAfterLinkSend();' style="vertical-align: middle">
+                <span class="fa fa-angle-left font-weight-bold" style="font-size: 20px; vertical-align: middle">&nbsp;</span>
+                login
+            </a>
+            <div class="mx-auto text-center mt-2">
+                <img src="https://mlab.com/css/images/email-sent.svg" alt="" height="100px;" class="rounded mx-auto d-block">
+                <h3 class="p-3">Instructions on resetting your password are on their way</h3>
+                <hr>
+                <p class="col-lg-8 mx-auto">If you don't receive an email soon ensure that the email is valid and that
+                    you
+                    can receive emails from support@buildovo.com. Contact support@buildovo.com for additional
+                    assistance.</p>
+                <hr>
+            </div>
+        </div>
+        <!-- reset password  -->
+        <div class="p-4 mx-auto bg-white rounded border col-lg-6" id="forgetPassword" hidden>
+            <div class="mx-auto">
+                <h4>Reset Password</h4>
+                <p>To reset your password, enter your email below and submit. An email will be sent to you with
+                    instructions about how to complete the process.</p>
+                <hr>
+                <form action="javascript:void(0);" id='resetForm' class="needs-validation" novalidate>
+                    <p class="alert alert-warning" ng-show='resetError'>[[resetError]]</p>
+                    <div class="form-group mt-4">
+                        <input id="fpemail" class="form-control form-control-sm" required placeholder="John@gmail.com" type="email" ng-model='fpemail'>
+                    </div>
+                    <div class="btn btn-sm btn-success" ng-click='sendResetLink($event);'>
+                        Reset password<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" hidden></span>
+                    </div>
+                </form>
+                <input type="button" value="login" ng-click='showLogin()' class=" btn btn-success btn-sm">
+            </div>
+        </div>
+        <!-- Form For login -->
+        <div class="mt-4 shadow p-2 rounded" id='logindiv'>
+            <div id="" class="bg-white">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="user-tab" data-toggle="tab" href="#userloginformdiv" role="tab" aria-controls="home" aria-selected="true">Customer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="partner-tab" data-toggle="tab" href="#partnerloginformdiv" role="tab" aria-controls="profile" aria-selected="false">Partner</a>
+                    </li>
+                </ul>
+                <div class="tab-content p-2" id="myTabContent">
+                    <!-- user login  -->
+                    <div class="tab-pane fade show active" id="userloginformdiv" role="tabpanel" aria-labelledby="user-login-tab">
+                        <div class="row">
+                            <!-- login form -->
+                            <div class="col-lg-6 col-sm-12 col-md-6 p-lg-5 p-lg-3">
+                                <h4 class="mt-2"><span class="fa fa-lock">&nbsp;</span>Customer Login</h4>
+                                <form method="post" action="javascript:void(0);" class="" ng-submit='login($event)'>
+                                    <div class="form-group mt-3">
+                                        <label for="" hidden>Email</label>
+                                        <input ng-model='email' ng-class='emailClass' id="" class="form-control form-control-sm" type="email" name="" placeholder="Email">
+                                        <div class="invalid-feedback">
+                                            [[emailErrorMessage]]
+                                        </div>
+                                        <small class="text-muted">Usually, this is the email you used to
+                                            register</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" hidden>Email</label>
+                                        <input ng-model='password' ng-class='passwordClass' id="" class="form-control form-control-sm" type="password" name="" placeholder="Password">
+                                        <div class="invalid-feedback">
+                                            [[passwordErrorMessage]]
+                                        </div>
+                                        <small class="text-muted">Password must be 8 character Long</small>
+                                        <small>
+                                            <a class="float-right" href='javascript:void(0);' ng-click='showResetPassword("u");'>Forgot Password ?</a>
+                                        </small>
+                                    </div>
+                                    <div class="form-group">
+                                        <input id="" class=" btn btn-primary btn-sm" type="submit" name="" value="Login">
+                                    </div>
+                                </form>
+                                <hr>
+                            </div>
+                            <!-- new user -->
+                            <div class="col-lg-6 col-md-6 border border-right-0 border-bottom-0 border-top-0 ">
+                                <div class=" p-3">
+                                    <h2>New user ? </h2>
+                                    <h4 class=""><a href="/signup">Signup Now</a></h4>
+                                    <hr>
+                                    <p>Lorem ipsum dolor sit amet consectetur
+                                        adipisicing elit. Atque veniam dolore similique nesciunt
+                                        iste laudantium ex ab, reprehenderit nam vel neque at numquam beatae
+                                        corrupti repudiandae excepturi eos totam quae!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- partner login  -->
+                    <div class="tab-pane fade" id="partnerloginformdiv" role="tabpanel" aria-labelledby="partner-login-tab">
+                        <div class="row">
+                            <!-- login form -->
+                            <div class="col-lg-6 col-sm-12 col-md-6 p-lg-5 p-lg-3">
+                                <h4 class="mt-2"><span class="fa fa-lock">&nbsp;</span>Partner Login</h4>
+                                <!-- form start -->
+                                <form method="post" action="javascript:void(0);" class="" ng-submit='partner($event);'>
+                                    <!-- email -->
+                                    <div class="form-group mt-3">
+                                        <label for="" hidden>Email</label>
+                                        <input ng-model='partnerEmail' ng-class='partnerEmailClass' id="" class="form-control form-control-sm" type="email" name="" placeholder="Email">
+                                        <div class="invalid-feedback">
+                                            [[partnerEmailErrorMessage]]
+                                        </div>
+                                        <small class="text-muted">Usually, this is the email you used to
+                                            register</small>
+                                    </div>
+                                    <!-- password -->
+                                    <div class="form-group">
+                                        <label for="" hidden>Email</label>
+                                        <input ng-model='partnerPassword' ng-class='partnerPasswordClass' id="" class="form-control form-control-sm" type="password" name="" placeholder="Password">
+                                        <div class="invalid-feedback">
+                                            [[partnerPasswordErrorMessage]]
+                                        </div>
+                                        <small class="text-muted">Password must be 8 character Long</small>
+                                        <small>
+                                            <a class="float-right" href='javascript:void(0);' ng-click='showResetPassword("p");'>Forgot Password ?</a>
+                                        </small>
+                                    </div>
+                                    <!-- submit button -->
+                                    <div class="form-group">
+                                        <input id="" class=" btn btn-primary btn-sm" type="submit" name="" value="Login">
+                                    </div>
+                                </form>
+                                <hr>
+                            </div>
+                            <!-- new partner -->
+                            <div class="col-lg-6 col-md-6 border border-right-0 border-bottom-0 border-top-0 ">
+                                <div class=" p-3">
+                                    <h2>Not Joined Yet </h2>
+                                    <h4 class=""><a href="/signup">Join Us Now</a></h4>
+                                    <hr>
+                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                                        Nostrum ut excepturi perferendis nihil corrupti earum
+                                        aut quas dolor provident, facere consequuntur,
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
+                                        illo, eos ratione possimus molestiae blanditiis voluptates explicabo et!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/reload/reload.js"></script>
+{% endblock %}
+{% block scripts %}
+<link rel="stylesheet" href="/css/animate.css">
+<script src="/customjs/userlogin.js"></script>
+<style>
+</style>
+{% endblock %}

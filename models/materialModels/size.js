@@ -4,28 +4,47 @@ const sizeSchema = new mongoose.Schema({
     size:{
         type : String , 
         required : true,
-    }
-    ,
-    productCategory : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : 'productCoreCategory' ,
-        require : true
     }, 
     product : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'product' ,
+        ref : 'constructionMaterial' ,
         require : true
     },
-    pUnit:{
+    description:{
         type : String , 
-        required : true,
+        required : false,
     },
-    sUnit:{
-        type : String , 
-        required : true,
-    }
+    brand:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref : 'brand',
+        required : false
+    }, 
+    images : [
+        {
+            type : String , 
+            default : []
+        }
+    ]
 
 })
 
+
+
 const Size = mongoose.model('size', sizeSchema);
+
+
+
+// get All
+// works as a static method 
+// call like --> Size.getAll();
+Size.getAll = function(){
+    return new Promise(async(resolve , reject)=>{
+        const result = await Size.find().select();
+        console.log("size.js  + Size.getAll");
+        resolve(result)
+    });
+}
+
+
 module.exports = { Size, sizeSchema }
+

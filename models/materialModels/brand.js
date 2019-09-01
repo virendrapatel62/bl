@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 // Schema of the model
 const brandSchema = new mongoose.Schema({
-    title:{
+    brand:{
         type : String , 
         required : true,
     }, 
@@ -19,17 +19,12 @@ const brandSchema = new mongoose.Schema({
     }, 
     product : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'product' ,
+        ref : 'constructionMaterial' ,
         require : true
-    },
-    productType : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : 'productType' ,
-        require : false
     },
     images : {
         type : [String] , 
-        required : true
+        required : false
     } ,
 })
 
@@ -47,6 +42,15 @@ Brand.getAll = function(){
     return new Promise(async(resolve , reject)=>{
         const result = await Brand.find().select();
         console.log("brand.js  + Brand.prototype.getAll");
+        resolve(result)
+    });
+}
+
+// get brands of products /// by product Id
+Brand.getByProduct = function(product){
+    return new Promise(async(resolve , reject)=>{
+        const result = await Brand.find({product : product}).select();
+        console.log("brand.js  + Brand.prototype.getById");
         resolve(result)
     });
 }

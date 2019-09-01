@@ -13,7 +13,7 @@ const  passwordHash= require('password-hash');
 
 // show signup page
 Router.get('/', async (req, res) => {
-    const template = swig.compileFile(path.join(__dirname, "../html/user_signuppage.html"))
+    const template = swig.compileFile(path.join(__dirname, "../html/main/signup.html"))
     const cities = await City.find().sort('name').select();
     for (i in cities) {
         cities[i].id = cities._id;
@@ -81,7 +81,7 @@ Router.post('/', async (req, res) => {
 // signup  for Partners 
 // serves the paernner signup page
 Router.get('/joinusaspartner', async (req, res) => {
-    const template = swig.compileFile(path.join(__dirname, "../html/partner/signuppage.html"));
+    const template = swig.compileFile(path.join(__dirname, "../html/main/partner/signup.html"));
 
     const cities = await City.find().sort('name').select();
     for (i in cities) {

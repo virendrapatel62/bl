@@ -12,7 +12,7 @@ const ProductSchema = new mongoose.Schema({
     },
     images : {
         type : [String] , 
-        required : true
+        required : false
     } , 
     productCategory : {
         type : mongoose.Schema.Types.ObjectId,

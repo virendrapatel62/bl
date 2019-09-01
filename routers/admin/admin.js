@@ -104,7 +104,6 @@ Router.post('/service/add' , async (req , res)=>{
 Router.get('/coreservices' , async (req , res)=>{
     const service = await CoreServices.find().select();
     res.send(service)
-    
 })
 
 // serve All SUb Services  

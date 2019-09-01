@@ -2,12 +2,12 @@ const swig = require('swig')
 const path = require('path')
 const winston = require('winston')
 
+
 // winston 
 //error 
 // info 
 // silly 
 // debug
-
 
 module.exports = function(error , req , res , next){
     console.log(__filename);

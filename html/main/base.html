@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>{%block title%}{%endblock%}</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <a class="navbar-brand" href="/"><img src="/img/logo.png" width="150px" style="margin-top: -10px;"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-md-center mr-0 mr-lg-5" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="px-4 nav-item nav-link {%block home%}{%endblock%}" href="/">Home<span class="sr-only">(current)</span></a>
+                <a class="px-4 nav-item nav-link {%block meterial%}{%endblock%}" href="#">Meterial</a>
+                <a class="px-4 nav-item nav-link {%block about%}{%endblock%}" href="/about">About Us</a>
+                <a class="px-4 nav-item nav-link {%block contact%}{%endblock%}" href="/contact">Contact Us</a>
+                <a class="px-4 nav-item nav-link {%block login%}{%endblock%} d-block d-md-none d-lg-none" href="/login">Login</a>
+            </div>
+        </div>
+        {% if locals.user %}
+        <div class="dropdown d-none d-md-block">
+            <a href="javascript:void(0);" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="img/user.png" width="30px">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" style="margin-top: 13px;margin-right:-16px;" aria-labelledby="dropdownMenuLink">
+                <h5 class="dropdown-item" style="background-color:#007BFF;color: white; margin-top: -8px;">Hello, {{locals.user.name}}</h5>
+                <a class="dropdown-item" href="/user/profile"><i class="fa fa-user nav-icon"></i> Your Profile</a>
+                <a class="dropdown-item" href="/user/cart"><i class="fa fa-shopping-cart nav-icon"></i> Your Cart</a>
+                <a class="dropdown-item" href="/user/orders"><i class="fa fa-shopping-bag nav-icon"></i> Your Orders</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/user/account-settings"><i class="fa fa-cogs nav-icon"></i> Setting</a>
+                <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out nav-icon"></i> LogOut</a>
+            </div>
+        </div>
+        {% elif locals.partner %}
+        <div class="dropdown d-none d-md-block">
+            <a href="javascript:void(0);" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="img/user.png" width="30px">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" style="margin-top: 13px;margin-right:-16px;" aria-labelledby="dropdownMenuLink">
+                <h5 class="dropdown-item" style="background-color:#007BFF;color: white; margin-top: -8px;">Hello, {{locals.partner.name}}</h5>
+                <a class="dropdown-item" href="/partner/profile"><i class="fa fa-user nav-icon"></i> Your Profile</a>
+                <a class="dropdown-item" href="/partner/cart"><i class="fa fa-shopping-cart nav-icon"></i> Your Cart</a>
+                <a class="dropdown-item" href="/partner/orders"><i class="fa fa-shopping-bag nav-icon"></i> Your Orders</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/partner/setting"><i class="fa fa-cogs nav-icon"></i> Setting</a>
+                <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out nav-icon"></i> LogOut</a>
+            </div>
+        </div>
+        {% else %}
+        <a class="nav-item nav-link {%block login%}{%endblock%} d-none d-md-block" href="/login">Login</a>
+        <div class="dropdown d-none d-md-block">
+            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="img/user.png" width="30px">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" style="margin-top: 13px;margin-right:-16px;" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="/user/cart"><i class="fa fa-shopping-cart nav-icon"></i> Your Cart</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/login"><i class="fa fa-sign-out nav-icon"></i> Login</a>
+            </div>
+        </div>
+        {%endif%}
+    </nav>
+    {%block content%}
+    {%endblock%}
+    <hr>
+    <footer class="py-2 text-muted text-center text-small">
+        <p class="mb-1" style="color:#FD6165;">&copy; 2018-2019 Buildovo</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!--main Js-->
+    <script src="/js/angular.min.js"></script>
+    <script src="/reload/reload.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/customjs/jquery-ui.min.js"></script>
+    <script src="/js/jquery.dataTables.min.js"></script>
+    <script src="/customjs/header.js"></script>
+    {% block scripts %} {% endblock %}
+</body>
+
+</html>

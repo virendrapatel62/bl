@@ -11,7 +11,7 @@ const passwordHash = require('password-hash')
 
 Router.get('/' , (req , res)=>{
     logger('serving loggin page to user')
-        const teamplate = swig.compileFile(path.join(__dirname , '/../html/userlogin.html' ));
+        const teamplate = swig.compileFile(path.join(__dirname , '/../html/main/login.html' ));
     res.send(teamplate());
 })
 
@@ -39,7 +39,7 @@ Router.post('/', async(req , res)=>{
 // serves ther partner login page
 Router.get('/partnerloginpage' , (req , res)=>{
     logger('serve partner login page')
-    const teamplate = swig.compileFile(path.join(__dirname , "/../html/partner/partnerlogin.html"))
+    const teamplate = swig.compileFile(path.join(__dirname , "/../html/main/partner/login.html"))
     res.send(teamplate())
 })
 

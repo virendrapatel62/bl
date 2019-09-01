@@ -1,9 +1,12 @@
 const mongoose = require('mongoose')
-
+const { MRP } = require('./mrp');
+const { Size } = require('./size');
+const { Varient } = require('./varient');
+const { Brand } = require('./brand');
 
 // schema
 const constructionMaterialSchema = new mongoose.Schema({
-    name: {
+    productName: {
         type: String,
         required: true,
     }
@@ -12,101 +15,250 @@ const constructionMaterialSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    brands: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'brand',
-        require: true,
-        default: []
-    }],
-    size: {
-        type: [String],
-        required: false,
-    },
-    varients: [{
-        varient: String,
-        mrp: Number,
-        size: String
-    }],
-    unit: {
-        type: String,
-        required: false
-    },
     images: {
         type: [String],
-        required: true
+        required: false
     },
+    MRP: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'mrp',
+        required: true,
+        default: []
+    }],
     productCategory: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'productCoreCategory',
         require: false
     },
-    subcategory: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'productType',
-        required: false,
-        default: []
-    }]
 })
 
 //Model
-const constructionMaterial = mongoose.model('constructionMaterial', constructionMaterialSchema);
+const ConstructionMaterial = mongoose.model('constructionMaterial', constructionMaterialSchema);
+//===============================================================================
 
-// get all product types
-constructionMaterial.getAll = function () {
+// get Product By Category
+ConstructionMaterial.getProductsByCategory = function (category) {
     // returning a promish
     return new Promise(async (resolve, reject) => {
-        const result = await constructionMaterial.find().deepPopulate('subcategory brands').select();
+        const result = await ConstructionMaterial
+            .find(
+                {
+                    productCategory : category
+                }
+            )
+            .populate(
+                [
+                    {
+                        path: 'MRP',
+                        model: 'mrp',
+                        //populating brands , varint , sizes
+                        populate: [
+                            {
+                                path: 'brand',
+                                model: 'brand'
+                            },
+                            {
+                                path: 'varient',
+                                model: 'varient',
+                            },
+                            {
+                                path: 'size',
+                                model: 'size',
+                            }
+                        ]
+                    },
+                    {
+                        path: 'productCategory',
+                        model: 'productCoreCategory'
+                    }
+                ]
+            );
+        resolve(result);
+    })
+}
+
+// get all product types
+ConstructionMaterial.getAll = function () {
+    // returning a promish
+    return new Promise(async (resolve, reject) => {
+        const result = await ConstructionMaterial
+            .find()
+            .populate(
+                [
+                    {
+                        path: 'MRP',
+                        model: 'mrp',
+                        //populating brands , varint , sizes
+                        populate: [
+                            {
+                                path: 'brand',
+                                model: 'brand'
+                            },
+                            {
+                                path: 'varient',
+                                model: 'varient',
+                            },
+                            {
+                                path: 'size',
+                                model: 'size',
+                            }
+                        ]
+                    },
+                    {
+                        path: 'productCategory',
+                        model: 'productCoreCategory'
+                    }
+                ]
+            );
         resolve(result);
     })
 }
 
 
 // get product By Id
-constructionMaterial.getById = function (id) {
+ConstructionMaterial.getById = function (id) {
     // returning a promish
     return new Promise(async (resolve, reject) => {
-        const result = await constructionMaterial.findById(id).deepPopulate('subcategory brands');
+        const result = await ConstructionMaterial.findOne({ _id: id })
+            .populate(
+                {
+                    path: 'MRP',
+                    model: 'mrp',
+                    //populating brands , varint , sizes
+                    populate: [
+                        {
+                            path: 'brand',
+                            model: 'brand'
+                        },
+                        {
+                            path: 'varient',
+                            model: 'varient',
+                        },
+                        {
+                            path: 'size',
+                            model: 'size',
+                        }
+                    ]
+                }
+            );
         resolve(result);
     })
 }
+
+
 // get all Name  ( Abstract name)
-constructionMaterial.getByName = function (name) {
+ConstructionMaterial.getByName = function (name) {
     // returning a promish
     return new Promise(async (resolve, reject) => {
-        const result = await constructionMaterial.find({
-            name: {
+        const result = await ConstructionMaterial.find({
+            productName: {
                 $regex: new RegExp(name, 'i')
             }
-        })
-        resolve(result);
-    })
-}
-// get by Size  
-constructionMaterial.getBySize = function (size) {
-    // returning a promish
-    return new Promise(async (resolve, reject) => {
-        const result = await constructionMaterial.find({
-            size: {
-                $in: size
+        }).populate(
+            {
+                path: 'MRP',
+                model: 'mrp',
+                //populating brands , varint , sizes
+                populate: [
+                    {
+                        path: 'brand',
+                        model: 'brand'
+                    },
+                    {
+                        path: 'varient',
+                        model: 'varient',
+                    },
+                    {
+                        path: 'size',
+                        model: 'size',
+                    }
+                ]
             }
-        }).deepPopulate('subcategory brands').select();
+        )
         resolve(result);
     })
 }
 
-// get by SubCategory  
-constructionMaterial.getBySubCategory = function (subCat) {
+
+// get by Size  
+ConstructionMaterial.getBySize = function (size) {
     // returning a promish
     return new Promise(async (resolve, reject) => {
-        const result = await constructionMaterial
-            .findOne()
-            .where(
-                {
-                    subcategory: subCat
-                }
-            )
-            .deepPopulate('subcategory brands').select()
+        const result = await Size
+            .find({ size: size })
+            .populate(
+                [
+                    // populating product 
+                    {
+                        path: 'product',
+                        model: 'constructionMaterial',
+                        // pupulating mrps
+                        populate: {
+                            path: 'MRP',
+                            model: 'mrp',
+                            //populating brands , varint , sizes
+                            populate: [
+                                {
+                                    path: 'brand',
+                                    model: 'brand'
+                                },
+                                {
+                                    path: 'varient',
+                                    model: 'varient'
+                                },
+                                {
+                                    path: 'size',
+                                    model: 'size'
+                                }
+                            ]
+                        }
 
+                    },
+                ]
+            )
+            .select('product')
+        resolve(result);
+    })
+}
+
+
+// get by brand ID
+ConstructionMaterial.getByBrand = function (_id) {
+    // returning a promish
+    return new Promise(async (resolve, reject) => {
+        const result = await Brand
+            .find({ _id })
+            .populate(
+                [
+                    // populating product 
+                    {
+                        path: 'product',
+                        model: 'constructionMaterial',
+                        // pupulating mrps
+                        populate: {
+                            path: 'MRP',
+                            model: 'mrp',
+                            //populating brands , varint , sizes
+                            populate: [
+                                {
+                                    path: 'brand',
+                                    model: 'brand'
+                                },
+                                {
+                                    path: 'varient',
+                                    model: 'varient'
+                                },
+                                {
+                                    path: 'size',
+                                    model: 'size'
+                                }
+                            ]
+                        }
+
+                    },
+                ]
+            )
+            .select('product')
         resolve(result);
     })
 }
@@ -114,13 +266,15 @@ constructionMaterial.getBySubCategory = function (subCat) {
 
 
 
-
+//=======================================================================
 var deepPopulate = require('mongoose-deep-populate')(mongoose);
 constructionMaterialSchema.plugin(deepPopulate, {
     whitelist: [
-        'subcategory',
-        'brands'
+        'MRP',
+        'MRP.brand',
+        'MRP.size',
+        'MRP.varient',
     ]
 });
 
-module.exports = { constructionMaterial, constructionMaterialSchema }
+module.exports = {ConstructionMaterial, constructionMaterialSchema }
