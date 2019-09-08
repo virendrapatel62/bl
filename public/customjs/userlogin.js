@@ -215,7 +215,7 @@ app.controller('userLoginController', function ($scope, $http) {
         }).then(
             function (result) {
                 console.log(result.data);
-                window.location = '/partner/home'
+                window.location = result.data.nextPage;
             },
             function (error) {
                 console.log(error);

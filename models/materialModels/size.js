@@ -32,7 +32,10 @@ const sizeSchema = new mongoose.Schema({
 
 const Size = mongoose.model('size', sizeSchema);
 
-
+sizeSchema.methods.toString = function(){
+    console.log(this);
+    
+}
 
 // get All
 // works as a static method 
@@ -44,6 +47,23 @@ Size.getAll = function(){
         resolve(result)
     });
 }
+
+// get Sizes by Product 
+Size.getByProduct = function(product){
+    return new Promise(async(resolve , reject)=>{
+        const result = await Size.find({product : product }).select();
+        resolve(result)
+    });
+}
+
+// get Sizes by brand 
+Size.getByBrand = function(brand){
+    return new Promise(async(resolve , reject)=>{
+        const result = await Size.find({brand : brand }).select();
+        resolve(result)
+    });
+}
+
 
 
 module.exports = { Size, sizeSchema }

@@ -1,0 +1,83 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/customcss/admin/scroll.css">
+    <link rel="stylesheet" href="/customcss/partner/dashboard/dashboard.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/icon-fas.min.css">
+</head>
+
+<body>
+    <div class="">
+        <div class="sidebar">
+            <div class="profile mb-3">
+                <div class="">
+                    <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png"
+                        class="rounded mx-auto d-block" height="80px" alt="">
+                    <p class="text-center">{{locals.partner.name}}</p>
+                </div>
+            </div>
+            <hr>
+            <ul class="list-group sideBarLinks">
+                <li class="list-group-item selected"><i class="fa fa-home">&nbsp;&nbsp;</i>&nbsp;Home</li>
+                <li class="list-group-item" url='/partner/dashboard/orders'><i class="fa fa-list"></i>&nbsp;Orders</li>
+                <li class="list-group-item " url='/partner/dashboard/services'><i class="fa fa-list"></i>&nbsp;Services</li>
+                <li class="list-group-item p-0 m-0"><div class="dropdown-divider"></div></li>
+                
+                <li class="list-group-item "><h5>Materials</h5></li>
+                <li class="list-group-item " url='/partner/dashboard/construction-materials'><i class="fas fa-hard-hat"></i>&nbsp;Constuction Materials</li>
+            </ul>
+        </div>
+        <div class="main">
+            <nav class="navbar d-flex justify-content-between">
+                <!-- header Text -->
+                    <span class="navbar-brand" class="text-white">Buildovo Dealer</span>
+                <!-- drop down -->
+                    <ul class="navbar-nav text-white">
+
+                        <li class="nav-link">
+                            <i class="fas fa-sign-out-alt"></i><a href="/logout">Logout</a>
+                        </li>
+
+                        <!-- <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0);" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                {{locals.partner.name}}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/partner/profile">My Profile</a>
+                                <a class="dropdown-item" href="/partner/orders">Orders</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/partner/account-settings">Account Setting</a>
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            </div>
+                        </li> -->
+                    </ul>
+            </nav>
+
+
+            <!-- // i frame for serving pages -->
+            <iframe src="" frameborder="0"></iframe>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/reload/reload.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/customjs/partner/dashboard/dashboard.js"></script>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/js/popper.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/angular.min.js"></script>
+<script src="/js/icon-fas.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="/customjs/jquery-ui.min.js"></script>
+

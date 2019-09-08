@@ -81,7 +81,8 @@ ConstructionMaterial.getProductsByCategory = function (category) {
 ConstructionMaterial.getAll = function () {
     // returning a promish
     return new Promise(async (resolve, reject) => {
-        const result = await ConstructionMaterial
+        try {
+            const result = await ConstructionMaterial
             .find()
             .populate(
                 [
@@ -110,7 +111,12 @@ ConstructionMaterial.getAll = function () {
                     }
                 ]
             );
+            console.log('Model');
+            
         resolve(result);
+        } catch (error) {
+            reject(error)
+        }
     })
 }
 
@@ -119,7 +125,8 @@ ConstructionMaterial.getAll = function () {
 ConstructionMaterial.getById = function (id) {
     // returning a promish
     return new Promise(async (resolve, reject) => {
-        const result = await ConstructionMaterial.findOne({ _id: id })
+        try {
+            const result = await ConstructionMaterial.findOne({ _id: id })
             .populate(
                 {
                     path: 'MRP',
@@ -142,6 +149,9 @@ ConstructionMaterial.getById = function (id) {
                 }
             );
         resolve(result);
+        } catch (error) {
+            reject(error)
+        }
     })
 }
 
@@ -150,32 +160,36 @@ ConstructionMaterial.getById = function (id) {
 ConstructionMaterial.getByName = function (name) {
     // returning a promish
     return new Promise(async (resolve, reject) => {
-        const result = await ConstructionMaterial.find({
-            productName: {
-                $regex: new RegExp(name, 'i')
-            }
-        }).populate(
-            {
-                path: 'MRP',
-                model: 'mrp',
-                //populating brands , varint , sizes
-                populate: [
-                    {
-                        path: 'brand',
-                        model: 'brand'
-                    },
-                    {
-                        path: 'varient',
-                        model: 'varient',
-                    },
-                    {
-                        path: 'size',
-                        model: 'size',
-                    }
-                ]
-            }
-        )
-        resolve(result);
+        try {
+            const result = await ConstructionMaterial.find({
+                productName: {
+                    $regex: new RegExp(name, 'i')
+                }
+            }).populate(
+                {
+                    path: 'MRP',
+                    model: 'mrp',
+                    //populating brands , varint , sizes
+                    populate: [
+                        {
+                            path: 'brand',
+                            model: 'brand'
+                        },
+                        {
+                            path: 'varient',
+                            model: 'varient',
+                        },
+                        {
+                            path: 'size',
+                            model: 'size',
+                        }
+                    ]
+                }
+            )
+            resolve(result);
+        } catch (error) {
+            reject(error)
+        }
     })
 }
 
@@ -184,7 +198,8 @@ ConstructionMaterial.getByName = function (name) {
 ConstructionMaterial.getBySize = function (size) {
     // returning a promish
     return new Promise(async (resolve, reject) => {
-        const result = await Size
+        try {
+            const result = await Size
             .find({ size: size })
             .populate(
                 [
@@ -218,6 +233,9 @@ ConstructionMaterial.getBySize = function (size) {
             )
             .select('product')
         resolve(result);
+        } catch (error) {
+            reject(error)
+        }
     })
 }
 
@@ -226,7 +244,8 @@ ConstructionMaterial.getBySize = function (size) {
 ConstructionMaterial.getByBrand = function (_id) {
     // returning a promish
     return new Promise(async (resolve, reject) => {
-        const result = await Brand
+        try {
+            const result = await Brand
             .find({ _id })
             .populate(
                 [
@@ -260,6 +279,9 @@ ConstructionMaterial.getByBrand = function (_id) {
             )
             .select('product')
         resolve(result);
+        } catch (error) {
+            reject(error)
+        }
     })
 }
 

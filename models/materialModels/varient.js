@@ -41,6 +41,22 @@ Varient.getAll = function(){
     });
 }
 
+// get By Product 
+Varient.getByProduct = function(product){
+    return new Promise(async(resolve , reject)=>{
+        const result = await Varient.find({product : product }).select();
+        resolve(result)
+    });
+}
+
+// get By Brand 
+Varient.getByBrand = function(brand){
+    return new Promise(async(resolve , reject)=>{
+        const result = await Varient.find({brand : brand }).select();
+        resolve(result)
+    });
+}
+
 
 
 

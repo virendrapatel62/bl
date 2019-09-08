@@ -3,7 +3,7 @@ const logger = require('debug')('Db.js : ')
 
 module.exports = function(app){
     const url = 'mongodb+srv://vidly:1234@cluster0-e9dlq.mongodb.net/test?retryWrites=true&w=majority';
-    const local = "mongodb://localhost/buildovo";
+    // const url = "mongodb://localhost/buildovo";
     mongoose.connect(url  , async function(err , database){
         // var r = await database.collections.partnerservices.getIndexes();
         // database.collections.partners.dropIndex('locat_2dsphere') ;

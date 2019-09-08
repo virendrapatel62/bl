@@ -1,0 +1,88 @@
+{% extends "header.html" %}
+
+{% block content %}
+<br>
+
+<style>
+    .table {
+        font-size: 14px;
+    }
+
+    tr {
+        cursor: pointer;
+    }
+
+    .font-15 {
+        font-size: 20px;
+    }
+
+    .text-disabled {
+        color: rgba(0, 0, 0, 0.075)
+    }
+</style>
+
+<div class="container-fluid rounded p-2" ng-app='constructionMaterialsApp'
+    ng-controller='constructionMaterialsController'>
+    <!-- <h2 class="alert alert-info">Add Services</h2> -->
+    <div class="col-lg-11  mx-auto">
+        <h3 class="alert alert-light test-dark border bg-light rounded">Select Construction Materials</h3>
+    </div>
+
+    <hr>
+    <div class="row col-lg-11 mx-auto">
+        <p class="mr-3"><i class="fa fa-check-circle font-15 text-success" style="vertical-align: middle"></i>&nbsp;Selling </p>
+        <p class=""><i class="fa fa-check-circle font-15 text-disabled" style="vertical-align: middle"></i>&nbsp;Not Selling
+        </p>
+    </div>
+    <hr>
+    <div class="p-2">
+        <table class="table table-sm table-hover" id='table' width='100%'>
+            <thead class="">
+                <tr>
+                    <th>Product</th>
+                    <th>Brand</th>
+                    <th>Varient</th>
+                    <th>Size</th>
+                    <th>MRP</th>
+                    <th>Your Prize (RS.)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in constructionMaterial %}
+                {% for MRP in product.MRP %}
+                <tr ng-click='rowClick($event);' class="selected">
+                    <td>
+                        {% if MRP.partnerProduct %}
+                        <i class="fa fa-check-circle font-15 text-success" style="vertical-align: middle"></i>
+                        {% else %}
+                        <i class="fa fa-check-circle font-15 text-disabled" style="vertical-align: middle"></i>
+                        {% endif %}
+
+                        &nbsp; {{product.productName}}
+                    </td>
+                    <td>{{MRP.brand.brand | default('-')}}</td>
+                    <td>{{MRP.varient.varient | default('-') }}</td>
+                    <td>{{MRP.size.size | default('-') }}</td>
+                    <td> RS. {{MRP.MRP | default('-')}}</td>
+                    <td><input type="number"
+                            ng-blur='onInputPrize($event , "{{MRP._id.toString()}}"  , "{{product._id.toString()}}" );'
+                            name="prize" id="prize" value="{{MRP.partnerProduct.prize}}"
+                            class="form-control form-control-sm col-lg-5"></td>
+                </tr>
+                {% endfor %}
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="/reload/reload.js"></script>
+
+<script src="/customjs/partner/dashboard/select_construction_materials.js"></script>
+
+
+{% endblock %}

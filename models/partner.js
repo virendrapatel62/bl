@@ -61,7 +61,7 @@ const partnerSchema = new mongoose.Schema({
     locality : {
         type : String,
         minlength : 3,
-        required : true
+        required : false
     },
     state: {
         type: mongoose.Schema.Types.ObjectId,

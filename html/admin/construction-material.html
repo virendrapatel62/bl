@@ -24,6 +24,10 @@
             <a class="nav-link" data-toggle="tab" href="#add-verient" role="tab" aria-controls="contact"
                 aria-selected="false">Add Verients</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#add-mrp" role="tab" aria-controls="contact"
+                aria-selected="false">Add MRPs</a>
+        </li>
     </ul>
     <div class="tab-content" id="myTabContent">
         <!-- add Product Tab -->
@@ -397,6 +401,105 @@
                             <input type="file" name="photos" id="photos" multiple class="form-control form-control-sm"
                                 placeholder="select File">
                         </div>
+
+                        <div class="form-group mt-2  col-lg-12">
+                            <input type="submit" class="form-control btn btn-sm btn-success col-lg-3" value="Save">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--  -->
+
+        </div>
+        <!-- tab-end -->
+
+        <!-- add -MRP start  -->
+        <div class="tab-pane fade" id="add-mrp" role="tabpanel" aria-labelledby="contact-tab">
+            <!-- add MRP -->
+            <div class="m-3">
+                <div ng-app='productMRPApp' id='productMRPApp' ng-controller='productMRPController'
+                    class="shadow m-2">
+                    <div class="alert alert-success border">
+                        <h4>Add Construction Material MRPs</h4>
+                        <!-- <hr> -->
+                    </div>
+
+                    <form action="javascript:void(0);" class="p-4 row" id='product_mrp_form' ng-submit='saveMRP($event);'>
+
+                        <!-- product Category -->
+                        <div class="input-group col-lg-5  mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Product Category</span>
+                            </div>
+                            <select name="productCategory" class="form-control" ng-model='productCategory'
+                                ng-change='loadProducts();'>
+                                <option value="-1">-- Select Product Category --</option>
+                                {% for i in coreCategories %}
+                                <option value="{{i._id.toString()}}">{{i.title}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <!-- product -->
+                        <div class="input-group col-lg-5  mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Product</span>
+                            </div>
+                            <select name="product" class="form-control" ng-model='product' ng-change='load_Brands_Sizes_Varients();'>
+                                <option value="-1">Select Product</option>
+                                <option ng-repeat='p in products' value="[[p._id]]">[[p.productName]]</option>
+                            </select>
+                        </div>
+                        <!-- select Brand -->
+
+                        <div class="input-group col-lg-5  mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Brand</span>
+                            </div>
+                            <select name="brand" class="form-control" ng-model='brand'  ng-change='load_Sizes_Varients();'>
+                                <option value="-1">Select Brand</option>
+                                <option ng-repeat='p in brands' value="[[p._id]]">[[p.brand]]</option>
+                            </select>
+                        </div>
+                        <!-- verient -->
+                        <div class="input-group col-lg-5  mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Varient</span>
+                            </div>
+                            <select name="varient" ng-model='varient' class="form-control">
+                                <option value="-1">Select Varient</option>
+                                <option ng-repeat='p in varients' value="[[p._id]]">[[p.varient]]</option>
+                            </select>
+                        </div>
+
+                        <!-- sizes -->
+                        <div class="input-group col-lg-5  mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Size</span>
+                            </div>
+                            <select name="size" ng-model='size' class="form-control">
+                                <option value="-1">Select Size</option>
+                                <option ng-repeat='p in sizes' value="[[p._id]]">[[p.size]]</option>
+                            </select>
+                        </div>
+                        <!-- MRPS -->
+                        <div class="input-group col-lg-5  mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">MRP</span>
+                            </div>
+                            <input type="number" name="mrp" id="mrp" ng-model='mrp' class="form-control form-control-sm">
+                        </div>
+
+                        <!-- <div class="input-group col-lg-8 mt-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">Description</span>
+                            </div>
+                            <textarea name="description" class="form-control"></textarea>
+                        </div> -->
+                        <!-- <div class="form-group mt-2  col-lg-5">
+                            <label for="unit" class="">Select Images</label>
+                            <input type="file" name="photos" id="photos" multiple class="form-control form-control-sm"
+                                placeholder="select File">
+                        </div> -->
 
                         <div class="form-group mt-2  col-lg-12">
                             <input type="submit" class="form-control btn btn-sm btn-success col-lg-3" value="Save">

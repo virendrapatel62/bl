@@ -1,0 +1,62 @@
+:root {
+    --bgcolor: #535C68;
+    --color : rgb(255, 255, 255);
+    --sideBarSize : 15%;
+    --mainDivMargin : 15.2%;
+    --iframeheight : 88%;
+    --navbarHeight : 10%;
+    --iframeMarginTop : 6%
+}
+
+body{
+    background-color: rgba(244, 246, 248, 0.87)
+}
+
+iframe{
+    margin-top: var(--iframeMarginTop);
+    width:98%;
+    height: var(--iframeheight);
+}
+.navbar{
+    position: fixed;
+    width: 84.7%;
+    height: var(--navbarHeight);
+    background-color: var(--bgcolor);
+    color: var(--color);
+}
+.navbar a{
+    color: aliceblue
+}
+.dropdown-menu{
+    background-color: var(--bgcolor)
+}
+.sidebar{
+    width: var(--sideBarSize);
+    position: fixed;
+    height: 100%;
+    /* border: 1px solid #333945; */
+    background-color: var(--bgcolor);
+    color: var(--color);
+    overflow-y:scroll;
+}
+.main{
+    margin-left: var(--mainDivMargin);
+}
+li{
+    cursor: pointer;
+    border: none;
+}
+.list-group ,.list-group-item{
+    padding: 8px;
+    text-align: left;
+    font-size : 14px;
+    background-color: var(--bgcolor); 
+    border:none;
+}
+.selected{
+    background-color: var(--color);
+    color: var(--bgcolor);
+}
+hr{
+    background-color: rgb(15, 14, 14)
+}

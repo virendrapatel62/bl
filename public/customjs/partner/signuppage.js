@@ -9,12 +9,12 @@ $(document).ready(function() {
 })
 
 function setTempValues() {
-    $('input[name="username"]').val('Mohan kumar');
-    $('input[name="email"]').val('mohan@gmail.com');
-    $('input[name="password"]').val('password');
-    $('input[name="repassword"]').val('password');
-    $('input[name="address"]').val('My Address');
-    $('input[name="contact"]').val('9144460897');
+    // $('input[name="username"]').val('Mohan kumar');
+    // $('input[name="email"]').val('mohan@gmail.com');
+    // $('input[name="password"]').val('password');
+    // $('input[name="repassword"]').val('password');
+    // $('input[name="address"]').val('My Address');
+    // $('input[name="contact"]').val('9144460897');
 }
 
 

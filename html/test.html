@@ -3,11 +3,45 @@
 
 <head>
     <link rel="stylesheet" href="../public/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/css/font-awesome.min.css">
     <title>Document</title>
 </head>
 
-<body>
-    
+<body class="bg-light">
+    <div class="p-4 col-lg-10 mx-auto">
+        <div id="loginbox" class="mx-auto border shadow mt-4 rounded col-md-6 col-lg-4 p-0 m-0 bg-white">
+            <div class="">
+                <h5 class="alert alert-light">Admin Sign In</h5>
+                <hr class="m-2 p-1 bg-light">
+                <br>
+                <div class="ml-4 mr-4 pl-2 pr-2 mb-4 pb-4">
+                    <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                    <form id="loginform" class="form-horizontal" role="form">
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                            </div>
+                            <input id="login-username" type="text" class="form-control" name="username" value=""
+                                placeholder="username or email">
+                        </div>
+
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                            </div>
+
+                            <input id="login-password" type="password" class="form-control" name="password"
+                                placeholder="password">
+                        </div>
+                        <div class="mx-auto">
+                            <a id="btn-login" href="#" class="btn btn-success col-lg-5">Login </a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
