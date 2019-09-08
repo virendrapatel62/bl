@@ -84,7 +84,7 @@ Router.get('/get-service-providers/:subservice/:lat/:lng', async (req, res) => {
                         type: "Point",
                         coordinates: [Number(lng), Number(lat)]
                     },
-                    $maxDistance: 20000,
+                    $maxDistance: 500000,
                 }
             }
         }
@@ -175,12 +175,12 @@ Router.post('/confirm-order', userAuthMiddleware, async (req, res) => {
         });
     }
 
-    logger('\nuser : ', user,
-        '\ncart : ', cart,
-        '\ncart items :  ', cart.cartItems,
-        '\n Body : ', body,
-        '\n service array : ', servicearr,
-        '\n Service Details Array : ', serviceDetailsArray);
+    logger({user,
+       cart,
+       items : cart.cartItems,
+        body,
+        servicearr,
+         serviceDetailsArray});
 
     // booking object 
     const booking = new MaintenanceBooking({

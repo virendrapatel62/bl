@@ -32,6 +32,10 @@ module.exports = function (app) {
         app.use('/partner/profile',require('../routers/partner/partenerprofile')) // profile added
         app.use('/partner/addservices', require('../routers/partner/addservices'))
         app.use('/partner/orders', require('../routers/partner/order'))
+        app.use('/partner/dashboard', require('../routers/partner/dashboard/dashboard'))
+        app.use('/partner/dashboard/orders', require('../routers/partner/dashboard/orders'))
+        app.use('/partner/dashboard/services', require('../routers/partner/dashboard/services'))
+        app.use('/partner/dashboard/construction-materials', require('../routers/partner/dashboard/construction-materials'))
 
     }
     

@@ -54,7 +54,9 @@ Router.post('/partnerlogin' ,async(req , res)=>{
                 .select();
     if(p && passwordHash.verify( req.body.password, p.password)){
         req.session.partner = p;
-        res.send().status(200);
+        res.send({
+            nextPage : '/partner/dashboard'
+        }).status(200);
     }else{
         res.status(401).send();
     }

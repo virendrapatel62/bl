@@ -5,65 +5,71 @@ const logger = require('debug')('products:Router')
 const { ProductCoreCategory } = require('../../../models/materialModels/product-core-category');
 const { Product } = require('../../../models/materialModels/product');
 const { getConstructionMatearialTypes } = require('../../../models/materialModels/product-type');
-const { ConstructionMaterial: constructionMaterial } = require('../../../models/materialModels/construction-material')
+const { ConstructionMaterial } = require('../../../models/materialModels/construction-material')
 const { Brand } = require('../../../models/materialModels/brand')
 const { Size } = require('../../../models/materialModels/size')
 const { Varient } = require('../../../models/materialModels/varient')
+const { MRP } = require('../../../models/materialModels/mrp')
+const AdminAuthMiddleware = require('../../../middlewares/adminAuthMiddleware')
 
 
 const log = console.log;
 
-// admin/dashboard/construction-material/get-product-types
+// admin/dashboard/construction-material/
 
 
 // sends the page // contruction material.html
-Router.get('/', async (req, res) => {
+Router.get('/',AdminAuthMiddleware ,  async (req, res) => {
     const template = swig.compileFile(path.join(__dirname, '/../../../html/admin/construction-material.html'))
-    const coreCategories = await ProductCoreCategory.getAll();
-    //log(coreCategories);
     res.send(template(
         {
-            coreCategories: coreCategories
+            coreCategories: await ProductCoreCategory.getAll()
         }
     ))
 })
 
 // get All Costruction material products 
-Router.get('/getAll', async (req, res) => {
+Router.get('/getAll',AdminAuthMiddleware ,  async (req, res) => {
     // getting all construction materials 
-    const { ConstructionMaterial: constructionMaterial } = require('../../../models/materialModels/construction-material')
-    const result = await constructionMaterial.getAll();
-    log(result);
-    res.send(result)
+    const { ConstructionMaterial } = require('../../../models/materialModels/construction-material')
+    res.send(await ConstructionMaterial.getAll())
 })
 
 
 // get All products of specific product Category
-Router.get('/get-products-by-category/:category', async (req, res) => {
-    const result = await constructionMaterial.getProductsByCategory(req.params.category);
-    res.send(result)
+Router.get('/get-products-by-category/:category',AdminAuthMiddleware ,  async (req, res) => {
+    res.send(await ConstructionMaterial.getProductsByCategory(req.params.category))
 })
 
 
 // get All products of specific product Category
-Router.get('/get-brands-by-product/:product', async (req, res) => {
-    const result = await Brand.getByProduct(req.params.product);
-    log(result);
-    
-    res.send(result)
+Router.get('/get-brands-by-product/:product',AdminAuthMiddleware , async (req, res) => {
+    res.send(await Brand.getByProduct(req.params.product))
 })
 
+// get All products of specific product Category
+Router.get('/get-brands-sizes-varients-by-product/:product', AdminAuthMiddleware , async (req, res) => {
+    res.send({
+        brands: await Brand.getByProduct(req.params.product),
+        varients: await Varient.getByProduct(req.params.product),
+        sizes: await Size.getByProduct(req.params.product)
+    })
+})
+
+// get All sizes and  varients using  brand id 
+Router.get('/get-sizes-varients-by-brand/:brand', AdminAuthMiddleware , async (req, res) => {
+    res.send(
+        {
+            varients: await Varient.getByBrand(req.params.brand),
+            sizes: await Size.getByBrand(req.params.brand)
+        }
+    )
+})
 
 // get products of category
-Router.get('/:category', async (req, res) => {
-
-    const result = await Product.find({ productCategory: req.params.category }).select();
-    //log(result);
-
-    res.send(result)
+Router.get('/:category', AdminAuthMiddleware , async (req, res) => {
+    res.send(await Product.find({ productCategory: req.params.category }).select())
 })
-
-
 
 //save product
 //admin/dashboard/construction-material/save-product
@@ -76,8 +82,8 @@ var storage = multer.diskStorage({
         cb(null, `construction_material_date_${Date.now()}.png`)
     }
 })
-var uploadProduct = multer({dest : 'uploads/products/construction_materials'})
-var uploadProduct = multer({storage : storage })
+var uploadProduct = multer({ dest: 'uploads/products/construction_materials' })
+var uploadProduct = multer({ storage: storage })
 // save-core-category
 Router.post('/save-product', uploadProduct.array('photos'), async (req, res) => {
     log((req.body));
@@ -91,9 +97,9 @@ Router.post('/save-product', uploadProduct.array('photos'), async (req, res) => 
         files.push(filepath)
     }
     log(files);
-    const { ConstructionMaterial: constructionMaterial } = require('../../../models/materialModels/construction-material')
+    const { ConstructionMaterial } = require('../../../models/materialModels/construction-material')
 
-    const product = new constructionMaterial({
+    const product = new ConstructionMaterial({
         productName: body.name,
         description: body.description,
         images: files,
@@ -109,7 +115,7 @@ Router.post('/save-product', uploadProduct.array('photos'), async (req, res) => 
 // save brand
 //admin/dashboard/construction-material/save-brand
 var multer = require('multer');
-var uploadProduct = multer({dest : 'uploads/products/construction_materials/brands'})
+var uploadProduct = multer({ dest: 'uploads/products/construction_materials/brands' })
 var uploadProduct = multer({
     storage: multer.diskStorage({
         destination: function (req, file, cb) {
@@ -127,17 +133,17 @@ Router.post('/save-brand', uploadProduct.array('photos'), async (req, res) => {
     const images = []
     for (var i in req.files) {
         var file = req.files[i];
-        var filepath =`${file.destination}/${file.filename}.png`;
+        var filepath = `${file.destination}/${file.filename}.png`;
         images.push(filepath)
     }
     log(images);
     log(body);
 
     const brand = new Brand({
-        brand : body.title,
-        description: body.description , 
-        productCategory : body.productCategory ,
-        product: body.product ,
+        brand: body.title,
+        description: body.description,
+        productCategory: body.productCategory,
+        product: body.product,
         images,  // it will be images : images  
     })
 
@@ -147,9 +153,9 @@ Router.post('/save-brand', uploadProduct.array('photos'), async (req, res) => {
 })
 
 // save size =========================================================================
- 
+
 var multer = require('multer');
-var uploadVerient = multer({dest : 'uploads/products/construction_materials/sizes' })
+var uploadVerient = multer({ dest: 'uploads/products/construction_materials/sizes' })
 var uploadVerient = multer({
     storage: multer.diskStorage({
         destination: function (req, file, cb) {
@@ -166,17 +172,17 @@ Router.post('/save-product-size', uploadVerient.array('photos'), async (req, res
     const images = []
     for (var i in req.files) {
         var file = req.files[i];
-        var filepath =`${file.destination}/${file.filename}.png`;
+        var filepath = `${file.destination}/${file.filename}.png`;
         images.push(filepath)
     }
     log(images);
     log(body);
 
     var size = new Size({
-        product : body.product , 
-        size : body.size ,
-        brand : (body.brand == '-1') ? undefined : body.brand , 
-        description : body.description , 
+        product: body.product,
+        size: body.size,
+        brand: (body.brand == '-1') ? undefined : body.brand,
+        description: body.description,
         images
     })
 
@@ -190,7 +196,7 @@ Router.post('/save-product-size', uploadVerient.array('photos'), async (req, res
 // save verient =========================================================================
 
 var multer = require('multer');
-var uploadVerient = multer({dest : 'uploads/products/construction_materials/verients' })
+var uploadVerient = multer({ dest: 'uploads/products/construction_materials/verients' })
 var uploadVerient = multer({
     storage: multer.diskStorage({
         destination: function (req, file, cb) {
@@ -207,16 +213,16 @@ Router.post('/save-product-varient', uploadVerient.array('photos'), async (req, 
     const images = []
     for (var i in req.files) {
         var file = req.files[i];
-        var filepath =`${file.destination}/${file.filename}.png`;
+        var filepath = `${file.destination}/${file.filename}.png`;
         images.push(filepath)
     }
     log(images);
     log(body);
     var varient = new Varient({
-        product : body.product , 
-        varient : body.varient ,
-        brand : (body.brand == '-1') ? undefined : body.brand , 
-        description : body.description , 
+        product: body.product,
+        varient: body.varient,
+        brand: (body.brand == '-1') ? undefined : body.brand,
+        description: body.description,
         images
     })
 
@@ -224,6 +230,59 @@ Router.post('/save-product-varient', uploadVerient.array('photos'), async (req, 
     const varientSaveResult = await varient.save();
     log(varientSaveResult)
     res.send(varientSaveResult)
+})
+
+
+
+// save Mrps
+Router.post('/save-mrp',AdminAuthMiddleware ,  async (req, res) => {
+    log('save MRP')
+    log(req.body)
+    if (!req.body.product || req.body.product == '-1') {
+        res.status(500).send('Select Product');
+        return;
+    }
+
+    if (!req.body.brand || req.body.brand == '-1') {
+        req.body.brand = undefined;
+    }
+
+
+    if (!req.body.varient || req.body.varient == '-1') {
+        req.body.varient = undefined;
+    }
+
+    if (!req.body.size || req.body.size == '-1') {
+        req.body.size = undefined;
+    }
+
+    if (!req.body.mrp || req.body.mrp == '') {
+        res.status(500).send('Enter Mrp');
+        return;
+    }
+
+    const {brand , varient , product , mrp , size } = req.body;
+    const obj = new  MRP({
+        brand , 
+        varient , 
+        product , 
+        size , 
+        MRP : mrp 
+    })
+
+    const result = await obj.save();
+
+    // push mrp to product
+
+    var productId = result.product ;
+    const update  = await ConstructionMaterial.updateOne({_id : productId} , {
+            $push : {
+                MRP : result._id
+            }
+    }) 
+
+    log({result , update })
+    res.send(result);
 })
 
 
