@@ -3,13 +3,12 @@ const swig = require('swig')
 const path = require('path')
 const logger = require('debug')('products:Router')
 const { ProductCoreCategory } = require('../../../models/materialModels/product-core-category');
-const { Product } = require('../../../models/materialModels/product');
-const { getConstructionMatearialTypes } = require('../../../models/materialModels/product-type');
-const { ConstructionMaterial } = require('../../../models/materialModels/construction-material')
+const { Product } = require('../../../models/materialModels/products');
 const { Brand } = require('../../../models/materialModels/brand')
 const { Size } = require('../../../models/materialModels/size')
 const { Varient } = require('../../../models/materialModels/varient')
 const { MRP } = require('../../../models/materialModels/mrp')
+const { PartnerProduct } = require('../../../models/materialModels/partnerProduct')
 const AdminAuthMiddleware = require('../../../middlewares/adminAuthMiddleware')
 
 
@@ -23,7 +22,8 @@ Router.get('/',AdminAuthMiddleware ,  async (req, res) => {
     const template = swig.compileFile(path.join(__dirname, '/../../../html/admin/construction-material.html'))
     res.send(template(
         {
-            coreCategories: await ProductCoreCategory.getAll()
+            coreCategories: await ProductCoreCategory.getAll() , 
+            stockTypes : Product.stockTypes
         }
     ))
 })
@@ -31,14 +31,13 @@ Router.get('/',AdminAuthMiddleware ,  async (req, res) => {
 // get All Costruction material products 
 Router.get('/getAll',AdminAuthMiddleware ,  async (req, res) => {
     // getting all construction materials 
-    const { ConstructionMaterial } = require('../../../models/materialModels/construction-material')
-    res.send(await ConstructionMaterial.getAll())
+    res.send(await Product.getAll())
 })
 
 
 // get All products of specific product Category
 Router.get('/get-products-by-category/:category',AdminAuthMiddleware ,  async (req, res) => {
-    res.send(await ConstructionMaterial.getProductsByCategory(req.params.category))
+    res.send(await Product.getProductsByCategory(req.params.category))
 })
 
 
@@ -97,11 +96,11 @@ Router.post('/save-product', uploadProduct.array('photos'), async (req, res) => 
         files.push(filepath)
     }
     log(files);
-    const { ConstructionMaterial } = require('../../../models/materialModels/construction-material')
 
-    const product = new ConstructionMaterial({
+    const product = new Product({
         productName: body.name,
         description: body.description,
+        stockType: body.stockType,
         images: files,
         productCategory: body.coreCategory
     })
@@ -275,7 +274,7 @@ Router.post('/save-mrp',AdminAuthMiddleware ,  async (req, res) => {
     // push mrp to product
 
     var productId = result.product ;
-    const update  = await ConstructionMaterial.updateOne({_id : productId} , {
+    const update  = await Product.updateOne({_id : productId} , {
             $push : {
                 MRP : result._id
             }

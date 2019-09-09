@@ -19,7 +19,7 @@ const brandSchema = new mongoose.Schema({
     }, 
     product : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'constructionMaterial' ,
+        ref : 'product' ,
         require : true
     },
     images : {

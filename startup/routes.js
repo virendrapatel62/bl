@@ -47,7 +47,6 @@ module.exports = function (app) {
         app.use('/admin/dashboard/products', require('../routers/admin/dashboard/products'))
         app.use('/admin/dashboard/brands', require('../routers/admin/dashboard/brand'))
         app.use('/admin/dashboard/sizes', require('../routers/admin/dashboard/size'))
-        app.use('/admin/dashboard/product-type', require('../routers/admin/dashboard/products-type'))
         app.use('/admin/dashboard/construction-material', require('../routers/admin/dashboard/construction-materials'))
 
     }

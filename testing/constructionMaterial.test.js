@@ -1,21 +1,24 @@
 require('../database/db');
-const { constructionMaterial } = require('../models/materialModels/construction-material')
+const { ConstructionMaterial } = require('../models/materialModels/construction-material')
 const request = require('supertest')
 
 let server;
 let product;
 
 async function init() {
-    product = await constructionMaterial.findOne().select();
+    product = await ConstructionMaterial.findOne().select();
 }
-init();
+
 
 
 
 // get All Matrials
 describe('GET /', () => {
 
-    beforeEach(async () => { server = require('../index'); })
+    beforeEach(async () => {
+        server = require('../index');
+        await init();
+    })
     afterEach(() => { server.close(); })
 
     it('should return an array ..', async () => {
@@ -32,7 +35,10 @@ describe('GET /', () => {
 // getting Consturction Material by Id 
 describe('GET /id/:id', () => {
 
-    beforeEach(async () => { server = require('../index'); })
+    beforeEach(async () => {
+        server = require('../index');
+        await init();
+    })
     afterEach(() => { server.close(); })
 
 
@@ -54,7 +60,10 @@ describe('GET /id/:id', () => {
 // getting Consturction Material by Name 
 describe('GET /name/:name', () => {
 
-    beforeEach(async () => { server = require('../index'); })
+    beforeEach(async () => {
+        server = require('../index');
+        await  init();
+    })
     afterEach(() => { server.close(); })
 
 

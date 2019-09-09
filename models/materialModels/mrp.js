@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const {CollectionNames} = require('../../constants/collection-names')
 
 
 // Schema of the model
@@ -9,22 +10,22 @@ const MRPSchema = new mongoose.Schema({
     },
     product : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'product' ,
+        ref : CollectionNames.PRODUCTS ,
         require : true
     }, 
     brand:{
         type: mongoose.Schema.Types.ObjectId,
-        ref : 'brand',
+        ref : CollectionNames.BRAND,
         required : false
     },
     size:{
         type: mongoose.Schema.Types.ObjectId,
-        ref : 'size',
+        ref : CollectionNames.SIZE,
         required : false
     },
     varient:{
         type: mongoose.Schema.Types.ObjectId,
-        ref : 'varient',
+        ref : CollectionNames.VARIENT,
         required : false
     }
 })
@@ -32,7 +33,7 @@ const MRPSchema = new mongoose.Schema({
 
 
 // Model Class
-const MRP = mongoose.model('mrp', MRPSchema);
+const MRP = mongoose.model( CollectionNames.MRP, MRPSchema);
 
 
 

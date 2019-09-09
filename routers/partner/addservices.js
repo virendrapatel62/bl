@@ -13,7 +13,7 @@ const partnerAuthMiddleware = require('../../middlewares/partnerAuthMiddleware')
 Router.get('/'  , partnerAuthMiddleware , (req , res)=>{
     const template = swig.compileFile(path.join(__dirname , "/../../html/partner/addservices.html"))
     const partner = req.body.partner
-    console.log(req.session.partner);
+    //console.log(req.session.partner);
     
     res.send(template(
         {
@@ -32,21 +32,21 @@ Router.get('/getCoreServices'   , async(req , res)=>{
     }).select();
     // const arr = new Array();
     const result = eval(JSON.stringify(services));
-    console.log(result);
+    //console.log(result);
     
     const partner = req.session.partner;
     for(var i in result){
         if(await PartnerService.findOne({ partner : partner._id , coreService : result[i]._id })){
-            console.log('yes it is in getSUb');
+            //console.log('yes it is in getSUb');
             result[i].checked = true;
         }else{
-            console.log('No it is in getSUb');
+            //console.log('No it is in getSUb');
             result[i].checked = false;
         }
         
     }
     
-    console.log(result);
+    //console.log(result);
     
     res.send(result)
 })
@@ -58,10 +58,10 @@ Router.get('/getSubServices/:core' , async(req , res)=>{
     const result = eval(JSON.stringify(services));
     for(var i in result){
         if(await PartnerService.findOne({ partner : partner._id , service : result[i]._id })){
-            console.log('yes it is in getSUb');
+            //console.log('yes it is in getSUb');
             result[i].checked = true;
         }else{
-            console.log('No it is in getSUb');
+            //console.log('No it is in getSUb');
             result[i].checked = false;
         }
     }
@@ -73,8 +73,8 @@ Router.get('/getSubServices/:core' , async(req , res)=>{
 Router.get('/save/partner/service/:core/:sub' , async(req , res)=>{
     const core = req.params.core;
     const sub = req.params.sub;
-    console.log('save service......');
-    console.log(req.session.partner);
+    //console.log('save service......');
+    //console.log(req.session.partner);
     
     if(!req.session.partner){
         res.status(401).send();
@@ -98,15 +98,15 @@ Router.get('/save/partner/service/:core/:sub' , async(req , res)=>{
 Router.get('/delete/partner/service/:core/:sub' , async(req , res)=>{
     const core = req.params.core;
     const sub = req.params.sub;
-    console.log('removing... seervice......');
+    //console.log('removing... seervice......');
     
     if(!req.session.partner){
         res.status(401).send();
         return ;
     }
-    console.log(core);
-    console.log(sub);
-    console.log(req.session.partner._id);
+    //console.log(core);
+    //console.log(sub);
+    //console.log(req.session.partner._id);
     
     const result = await PartnerService.deleteMany({
         partner : req.session.partner._id , 
@@ -114,7 +114,7 @@ Router.get('/delete/partner/service/:core/:sub' , async(req , res)=>{
         coreService : core
     })
     
-    console.log(result);
+    //console.log(result);
     
     // const services = await SubServices.find({coreservice : req.params.core}).select();
      res.send(result)

@@ -1,8 +1,13 @@
-$(document).ready(function(){
-    $('.sideBarLinks').find('li').click(function(){
+$(document).ready(function () {
+    console.clear()
+    
+    
+    $('.sideBarLinks').find('li').click(function () {
+
         const url = $(this).attr('url')
-        if(url){
-            $('iframe').attr('src' , url);
+        if (url) {
+            $('#pageLoader').attr('src', url)
+            console.log($('iframe'));
         }
     })
 })

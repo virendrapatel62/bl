@@ -117,4 +117,41 @@ function validatePartner(partner) {
 
 
 const Partner = mongoose.model('Partner', partnerSchema);
+
+// login partner
+Partner.login = function(email,password){
+    return new Promise(async (resolve,reject)=>{
+        try {
+            const partner = await Partner.findOne({
+                email : email
+            }).populate('city state');
+            
+            if (partner){
+                if(require('password-hash').verify(password,partner.password)){
+                    resolve(partner)
+                }else{
+                    reject(partnerErrors.passwordError)
+                }   
+            }else{
+                throw partnerErrors.partnerDoesNotExist
+            }
+        } catch (error) {
+            reject(error)
+        }
+    });
+}
+
+// Errors object
+
+const partnerErrors = {
+    passwordError : {
+        message : "password is not matched",
+        name : 'MisMatchPassword'
+    },
+    partnerDoesNotExist : {
+        message : 'Account not found',
+        name : 'AccountDoesNotExist'
+    }
+}
+
 module.exports = { Partner, partnerSchema, validatePartner }

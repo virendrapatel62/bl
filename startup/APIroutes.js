@@ -2,6 +2,7 @@ const express = require('express')
 module.exports = function (app) {
     //login
     {
+        app.use('/api/partner/login',require('../routers/api/partlogin'))
         app.use('/api/user/login', require('../routers/api/login'))
         app.use('/api/signup/user', require('../routers/api/signup'))
     }
@@ -24,8 +25,6 @@ module.exports = function (app) {
         app.use('/api/material/construction-material', require('../routers/api/materials/construction-material')) // construcction material 
         app.use('/api/material/size', require('../routers/api/materials/size'))
         app.use('/api/material/core-category', require('../routers/api/materials/core-category'))
-        app.use('/api/material/products', require('../routers/api/materials/product'))
         app.use('/api/material/brands', require('../routers/api/materials/brand'))
-        app.use('/api/material/product-types', require('../routers/api/materials/product-type'))
     }
 }

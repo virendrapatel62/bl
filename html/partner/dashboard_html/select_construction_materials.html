@@ -4,10 +4,6 @@
 <br>
 
 <style>
-    .table {
-        font-size: 14px;
-    }
-
     tr {
         cursor: pointer;
     }
@@ -19,24 +15,41 @@
     .text-disabled {
         color: rgba(0, 0, 0, 0.075)
     }
+
+    table {
+        text-align: center;
+        align-items: center
+    }
+
+    .form-control {
+        width: 80%
+    }
+
+    table,
+    .form-control {
+        font-size: 12px;
+
+    }
 </style>
 
 <div class="container-fluid rounded p-2" ng-app='constructionMaterialsApp'
     ng-controller='constructionMaterialsController'>
     <!-- <h2 class="alert alert-info">Add Services</h2> -->
     <div class="col-lg-11  mx-auto">
-        <h3 class="alert alert-light test-dark border bg-light rounded">Select Construction Materials</h3>
+        <h3 class="alert alert-light test-dark border bg-light rounded">Products</h3>
     </div>
 
     <hr>
     <div class="row col-lg-11 mx-auto">
-        <p class="mr-3"><i class="fa fa-check-circle font-15 text-success" style="vertical-align: middle"></i>&nbsp;Selling </p>
-        <p class=""><i class="fa fa-check-circle font-15 text-disabled" style="vertical-align: middle"></i>&nbsp;Not Selling
+        <p class="mr-3"><i class="fa fa-check-circle font-15 text-success"
+                style="vertical-align: middle"></i>&nbsp;Selling </p>
+        <p class=""><i class="fa fa-check-circle font-15 text-disabled" style="vertical-align: middle"></i>&nbsp;Not
+            Selling
         </p>
     </div>
     <hr>
     <div class="p-2">
-        <table class="table table-sm table-hover" id='table' width='100%'>
+        <table class="table table-sm table-hover table-bordered" id='table' width='100%'>
             <thead class="">
                 <tr>
                     <th>Product</th>
@@ -45,6 +58,9 @@
                     <th>Size</th>
                     <th>MRP</th>
                     <th>Your Prize (RS.)</th>
+                    <th>Available Quantity</th>
+                    <th>Stock <i class="fa fa-plus text-success"></i></th>
+                    <th>Stock <i class="fa fa-minus text-danger"></i></th>
                 </tr>
             </thead>
             <tbody>
@@ -64,10 +80,62 @@
                     <td>{{MRP.varient.varient | default('-') }}</td>
                     <td>{{MRP.size.size | default('-') }}</td>
                     <td> RS. {{MRP.MRP | default('-')}}</td>
-                    <td><input type="number"
-                            ng-blur='onInputPrize($event , "{{MRP._id.toString()}}"  , "{{product._id.toString()}}" );'
+                    <td>{{MRP.partnerProduct.stock}}
+                        <input type="number" ng-focus='prizeFocus($event)' ng-keyup='blurOnKeyPress($event)'
+                            ng-blur='onInputPrize($event , "{{MRP._id.toString()}}"  , "{{product._id.toString()}}" , "{{product.productStockType}}" );'
                             name="prize" id="prize" value="{{MRP.partnerProduct.prize}}"
-                            class="form-control form-control-sm col-lg-5"></td>
+                            class="form-control form-control-sm mx-auto" placeholder="Prize">
+                    </td>
+
+                    <!-- for add Stock -->
+                    {% if product.productStockType == stockTypes.MULTIPLE %}
+
+                    <td class='label{{MRP | createIdForHtml()}}'>{{MRP.partnerProduct.productStock.stock  | default(0)}}</td>
+                    <td class="">
+                        <input type="number" product-id='add{{MRP | createIdForHtml()}}'
+                            ng-focus='addQuantityFocus($event , "{{MRP | createIdForHtml()}}")'
+                            ng-keyup='blurOnKeyPress($event)'
+                            ng-blur='onInputQuantity($event , "{{MRP._id.toString()}}"  , "{{product._id.toString()}}" , "{{MRP | createIdForHtml()}}" );'
+                            name="quantity"
+                            class="form-control form-control-sm {{ MRP | createIdForHtml()}} mx-auto"
+                            placeholder="Enter Quantity">
+                    </td>
+
+
+                    <!-- remove stock -->
+                    <td class="">
+                        <input type="number" product-id='{{MRP | createIdForHtml()}}'
+                            ng-focus='removeQuantityFocus($event , "{{MRP | createIdForHtml()}}")'
+                            ng-keyup='blurOnKeyPress($event)'
+                            ng-blur='onRemoveQuantity($event , "{{MRP._id.toString()}}"  , "{{product._id.toString()}}" , "{{MRP | createIdForHtml()}}" );'
+                            name="quantity"
+                            class="form-control form-control-sm {{ MRP | createIdForHtml()}} mx-auto"
+                            placeholder="Enter Quantity" min="1">
+                    </td>
+                    {% else %}
+                    <td class='label{{product | createIdForHtml()}}'>{{MRP.partnerProduct.productStock.stock| default(0)}}</td>
+                    <td class="">
+                        <input type="number" ng-focus='addQuantityFocus($event , "{{product | createIdForHtml()}}")'
+                            ng-blur='onInputQuantity($event , "{{MRP._id.toString()}}"  , "{{product._id.toString()}}" , "{{product | createIdForHtml()}}" );'
+                            ng-keyup='blurOnKeyPress($event)' name="quantity"
+                            class="form-control form-control-sm {{ product | createIdForHtml()}} mx-auto"
+                            value="[[{{  MRP | createIdForHtml() }}]]" placeholder="Enter Quantity">
+                    </td>
+                    <!-- remove Stock -->
+                    <td class="">
+                        <input type="number" ng-focus='removeQuantityFocus($event , "{{product | createIdForHtml()}}")'
+                            ng-blur='onRemoveQuantity($event , "{{MRP._id.toString()}}"  , "{{product._id.toString()}}" , "{{product | createIdForHtml()}}" );'
+                            ng-keyup='blurOnKeyPress($event)' name="quantity"
+                            class="form-control form-control-sm {{ product | createIdForHtml()}} mx-auto"
+                           placeholder="Enter Quantity" min="1">
+                    </td>
+                    {% endif %}
+
+                    <!-- end Add Stock -->
+
+
+
+
                 </tr>
                 {% endfor %}
 

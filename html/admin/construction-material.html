@@ -98,7 +98,7 @@
                         </div>
                         
          -->
-                            <div class="form-group col-lg-4">
+                            <div class="form-group col-lg-5">
                                 <label for="">Select Product Category</label>
                                 <select name="coreCategory" id="" class="form-control">
                                     {% for i in coreCategories %}
@@ -106,10 +106,17 @@
                                     {% endfor %}
                                 </select>
                             </div>
+                            <div class="form-group col-lg-5">
+                                <label for="">Select Stock Type</label>
+                                <select name="stockType" id="" class="form-control">
+                                    <option value="{{stockTypes.SINGLE}}">{{stockTypes.SINGLE}}</option>
+                                    <option value="{{stockTypes.MULTIPLE}}">{{stockTypes.MULTIPLE}}</option>
+                                </select>
+                            </div>
                             <div class="form-group mt-2 col-lg-4">
                                 <label for="description" class="">Description</label>
                                 <textarea type="text" name="description" id="description"
-                                    class="form-control form-control-sm" placeholder="Description"></textArea>
+                                    class="form-control form-control-sm" placeholder="Description" required></textArea>
                             </div>
                             <div class="input-group mb-3 input-group-sm col-lg-5">
                                 <div class="input-group-prepend">

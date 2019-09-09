@@ -15,9 +15,7 @@ Router.get('/', partnerAuthMiddleware, async (req, res) => {
     const maintenanceOrders = await MaintenanceBooking
         .find({ partner: partner._id }).sort('-date').deepPopulate('user partner services')
         .select();
-
-    logger(maintenanceOrders)
-
+    // logger(maintenanceOrders)
     const template = swig.compileFile(path.join(__dirname, '/../../../html/partner/dashboard_html/orders.html'))
     res.send(template({
         locals: res.locals,

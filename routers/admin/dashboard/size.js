@@ -3,7 +3,7 @@ const swig = require('swig')
 const path = require('path')
 const logger = require('debug')('products:Router')
 const { ProductCoreCategory } = require('../../../models/materialModels/product-core-category');
-const { Product } = require('../../../models/materialModels/product');
+const { Product } = require('../../../models/materialModels/products');
 const { Brand } = require('../../../models/materialModels/brand');
 const { Size } = require('../../../models/materialModels/size');
 

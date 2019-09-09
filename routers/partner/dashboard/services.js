@@ -7,7 +7,7 @@ const partnerAuthMiddleware = require('../../../middlewares/partnerAuthMiddlewar
 Router.get('/'  , partnerAuthMiddleware , (req , res)=>{
     const template = swig.compileFile(path.join(__dirname , "/../../../html/partner/dashboard_html/select_services.html"))
     const partner = req.body.partner
-    console.log(req.session.partner);
+    // console.log(req.session.partner);
     
     res.send(template(
         {

@@ -54,6 +54,9 @@ require('./startup/prod')(app);
 // save states and cities
 require('./startup/citystatecollection');
 
+// swig filters
+require('./startup/swigFilter')(swig);
+
 // error middle wares
 app.use(require('./middlewares/error'));
 
@@ -85,8 +88,6 @@ server = app.listen(PORT, () => {
 //     })// reloadReturned is documented in the returns API in the README
 
 // })
-
-
 
 
 module.exports = server
