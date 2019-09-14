@@ -1,297 +1,353 @@
+<!doctype html>
 <html lang="en">
 
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="/img/favicon.png" type="image/png">
-    <title>Buildovo</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/vendors/linericon/style.css">
-    <link rel="stylesheet" href="/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/vendors/lightbox/simpleLightbox.css">
-    <link rel="stylesheet" href="/vendors/owl-carousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="/vendors/nice-select/css/nice-select.css">
-    <link rel="stylesheet" href="/vendors/animate-css/animate.css">
-    <link rel="stylesheet" href="/vendors/popup/magnific-popup.css">
-    <link rel="stylesheet" href="/css/hexagons.min.css">
-    <!-- main css -->
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/responsive.css">
     <link rel="stylesheet" href="/customcss/jquery-ui.min.css">
     <link rel="stylesheet" href="/css/jquery.dataTables.min.css">
 
     <!-- custom css -->
-    <link rel="stylesheet" href="/customcss/header.css">
-    <link href="/css/icon.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
 
-   
+    <link href="/css/icon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/card.css">
+
+
+
+    <title>{% block title %}{% endblock %}</title>
+
+
 </head>
 
-<body data-spy="scroll" data-target="#mainNav" data-offset="70">
 
-    <!-- login model -->
-    <div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="my-modal-title">Login First</h5>
-                    <button class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #ffbd2e;">
+            <a href="#menu-toggle" id="menu-toggle" class="navbar-brand d-block d-lg-none"><span
+                    class="navbar-toggler-icon"></span></a>
+            <a class="navbar-brand" href="/">
+                <img src="/img/index/logo.png" width="30" height="30">
+                <img src="/img/index/BUILDOVO_white.png" height="15">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/products">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <form class="navbar-form navbar-left form-horizontal order-2 order-md-1" role="search">
+                <div class="input-group">
+                    <input type="text" class="search-box" placeholder="Search">
+                    <button type="submit" class="btn"><i class="fa fa-search"></i></button>
                 </div>
-                <div class="modal-body">
-                    <form action="#" onsubmit='loginFromModal(event);'>
-                        <div class="alert alert-warning" hidden id='loginModalError'>
-                            <span>Email or Password incorrect</span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="login_modal_email">Email</label>
-                            <input id="login_modal_email" class="form-control form-control-sm" type="email"
-                                name="modalemail">
-                        </div>
-                        <div class="form-group">
-                            <label for="login_modal_password">password</label>
-                            <input id="login_modal_password" class="form-control form-control-sm" type="password"
-                                name="modalpassword">
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-sm btn-outline-success form-control" value="Login">
-                        </div>
-                    </form>
+            </form>
+            <div class="dropdown order-1 order-md-2">
+                <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <img src="/img/index/user.png" width="25" height="25"></button>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right mt-3" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="#"><i style="color: #ffbd2e;" class="fa fa-user nav-icon"> </i>
+                        Profile</a>
+                    <a class="dropdown-item" href="#"><i style="color: #ffbd2e;" class="fa fa-shopping-cart nav-icon">
+                        </i> Cart</a>
+                    <a class="dropdown-item" href="#"><i style="color: #ffbd2e;" class="fa fa-shopping-bag nav-icon">
+                        </i> Orders</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="Login.html"><i style="color: #ffbd2e;"
+                            class="fa fa-sign-out nav-icon"> </i> Login</a>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div id="partnerloginModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="my-modal-title">Login First</h5>
-                    <button class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="#" onsubmit='partnerLoginFromModal(event);'>
-                        <div class="alert alert-warning" hidden id='loginModalError'>
-                            <span>Email or Password incorrect</span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="partner_login_modal_email">Email</label>
-                            <input id="partner_login_modal_email" class="form-control form-control-sm" type="email"
-                                name="partnermodalemail">
-                        </div>
-                        <div class="form-group">
-                            <label for="partner_login_modal_password">password</label>
-                            <input id="partner_login_modal_password" class="form-control form-control-sm" type="password"
-                                name="partnermodalpassword">
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-sm btn-outline-success form-control" value="Login">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--================Header Menu Area =================-->
-    <header class="header_area ">
-        <div class="main_menu same-bg" id="mainNav">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <div class="container">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <a class="navbar-brand logo_h" href="/"><img src="/img/logo.png" alt="" height="45px;"></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item active"><a class="nav-link" href="/">HOME</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/#feature">FEATURES</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/#services">SERVICES</a>
-
-                                <!--
-								<li class="nav-item submenu dropdown">
-									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
-									<ul class="dropdown-menu">
-										<li class="nav-item"><a class="nav-link" href="elements.html">Elements</a></li>
-									</ul>
-								</li> 	
-                                -->
-                                <!-- ================BLOG MENU=================
-                                <li class="nav-item submenu dropdown">
-									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
-									<ul class="dropdown-menu">
-										<li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-										<li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
-									</ul>
-								</li>
-                                -->
-                            <li class="nav-item"><a class="nav-link" href="/career">CAREER</a>
-                            <li class="nav-item"><a class="nav-link" href="/about">ABOUT US</a>
-                            <li class="nav-item"><a class="nav-link" href="/contact">
-                                    CONTACT</a></li>
-
-
-
-
-                            {% if locals.user %}
-                            <li class="nav-item  dropdown">
-                                <a class="nav-link dropdown-toggle" href="javascript:void(0);" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    {{locals.user.name}}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/user/profile">My Profile</a>
-                                    <a class="dropdown-item" href="/user/orders">Orders</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="/user/account-settings">Account Setting</a>
-                                    <a class="dropdown-item" href="/logout">Logout</a>
-                                </div>
+        </nav>
+        <nav class="navbar navbar-expand navbar-light bg-light">
+            <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown dropdown-large">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                        <ul class="dropdown-menu dropdown-menu-large row">
+                            <li class="col-sm-3">
+                                <ul>
+                                    <li class="dropdown-header">Glyphicons</li>
+                                    <li><a href="#">Available glyphs</a></li>
+                                    <li class="disabled"><a href="#">How to use</a></li>
+                                    <li><a href="#">Examples</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Dropdowns</li>
+                                    <li><a href="#">Example</a></li>
+                                    <li><a href="#">Aligninment options</a></li>
+                                    <li><a href="#">Headers</a></li>
+                                    <li><a href="#">Disabled menu items</a></li>
+                                </ul>
                             </li>
-                            {% elif locals.partner %}
-                            <li class="nav-item  dropdown">
-                                <a class="nav-link dropdown-toggle" href="javascript:void(0);" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    {{locals.partner.name}}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/partner/profile">My Profile</a>
-                                    <a class="dropdown-item" href="/partner/orders">Orders</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="/partner/account-settings">Account Setting</a>
-                                    <a class="dropdown-item" href="/logout">Logout</a>
-                                </div>
+                            <li class="col-sm-3">
+                                <ul>
+                                    <li class="dropdown-header">Button groups</li>
+                                    <li><a href="#">Basic example</a></li>
+                                    <li><a href="#">Button toolbar</a></li>
+                                    <li><a href="#">Sizing</a></li>
+                                    <li><a href="#">Nesting</a></li>
+                                    <li><a href="#">Vertical variation</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Button dropdowns</li>
+                                    <li><a href="#">Single button dropdowns</a></li>
+                                </ul>
                             </li>
-                            {% else %}
-                            <li class="nav-item"><a class="nav-link" href="/login">Login / Signup</a></li>
-                            {% endif %}
+                            <li class="col-sm-3">
+                                <ul>
+                                    <li class="dropdown-header">Input groups</li>
+                                    <li><a href="#">Basic example</a></li>
+                                    <li><a href="#">Sizing</a></li>
+                                    <li><a href="#">Checkboxes and radio addons</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Navs</li>
+                                    <li><a href="#">Tabs</a></li>
+                                    <li><a href="#">Pills</a></li>
+                                    <li><a href="#">Justified</a></li>
+                                </ul>
+                            </li>
+                            <li class="col-sm-3">
+                                <ul>
+                                    <li class="dropdown-header">Navbar</li>
+                                    <li><a href="#">Default navbar</a></li>
+                                    <li><a href="#">Buttons</a></li>
+                                    <li><a href="#">Text</a></li>
+                                    <li><a href="#">Non-nav links</a></li>
+                                    <li><a href="#">Component alignment</a></li>
+                                    <li><a href="#">Fixed to top</a></li>
+                                    <li><a href="#">Fixed to bottom</a></li>
+                                    <li><a href="#">Static top</a></li>
+                                    <li><a href="#">Inverted navbar</a></li>
+                                </ul>
+                            </li>
                         </ul>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown022" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Shop By Catagory</a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown022">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link2</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown08" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Link3</a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown08">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper" style="position: fixed;">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand"> <a href="index.html"> Buildovo Home </a> </li>
+                    <li> <a href="index.html">Services</a> </li>
+                    <li> <a href="/products">Products</a> </li>
+                    <li> <a href="#">About</a> </li>
+                    <li> <a href="#">Events</a> </li>
+                    <li> <a href="#">Contact</a> </li>
+                    <li> <a href="login.html">Login</a> </li>
+                </ul>
+            </div> <!-- /#sidebar-wrapper -->
+        </div> <!-- /#wrapper -->
+
+    </header>
+    {% block content %} {% endblock %}
+    <footer class="p-5 bg-dark text-small">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-3 text-white">
+                    <img src="/img/index/starter_logo2.png" class="my-4 pl-3" alt="" width="60px">
+                    <img src="/img/index/BUILDOVO.png" class="my-4" alt="" width="180px">
+                    <h3 class="text-white pl-3">Download Our App</h3>
+                    <ul class="list-unstyled list-inline">
+                        <li class="list-inline-item">
+                            <a href="#" target="_blank"><img
+                                    src="https://www.vectorvest.com/wp-content/themes/vectorvest/images/social-appstore-white.png"
+                                    class=" mb-3" alt="" width="125px"></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="" target="_blank"><img
+                                    src="https://www.vectorvest.com/wp-content/themes/vectorvest/images/social-googleplay-white.png"
+                                    class=" mb-3" alt="" width="125px"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-sm-12 col-md-9">
+                    <div class="row">
+                        <div class="col-6 col-sm-4">
+                            <h5 class="text-white">What Is Buildovo?</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#" target="_blank">What Is Buildovo?</a></li>
+                                <li><a href="#" target="_blank">How it Works</a></li>
+                                <li><a href="#" target="_blank">Testimonials</a></li>
+                            </ul>
+
+                            <h5 class="text-white">Products</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#" target="_blank">Mobile App</a></li>
+                                <li><a href="#" target="_blank">RealTime Tracking</a></li>
+                                <li><a href="#" target="_blank">Pro Analyzer</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-sm-4">
+                            <h5 class="text-white">Our Policies</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#" target="_blank">Legal Information</a></li>
+                                <li><a href="#" target="_blank">Help Center</a></li>
+                                <li><a href="#" target="_blank">Contact Us</a></li>
+                                <li><a href="#" target="_blank">Privacy Policy</a></li>
+                                <li><a href="#" target="_blank">Orders & Payments</a></li>
+                                <li><a href="#" target="_blank">Refund Policy</a></li>
+                                <li><a href="#" target="_blank">FAQs</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-sm-4 d-none d-md-block">
+                            <h5 class="text-white">Live Events</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#" target="_blank">US Events</a></li>
+                                <li><a href="#" target="_blank">EU Events</a></li>
+                                <li><a href="#" target="_blank">SG Events</a></li>
+                            </ul>
+                            <h5 class="text-white">Other Links</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#" target="_blank">Home</a></li>
+                                <li><a href="#" target="_blank">About us</a></li>
+                                <li><a href="#" target="_blank">Map</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </nav>
-        </div>
-    </header>
-    <br>
-
-
-    <!--================Header Menu Area =================-->
-
-    <!--================Contact Success and Error message Area =================-->
-    <div id="success" class="modal modal-message fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <i class="fa fa-close"></i>
-                    </button>
-                    <h2>Thank you</h2>
-                    <p>Your message is successfully sent...</p>
-                </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Modals error -->
-
-    <div id="error" class="modal modal-message fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <i class="fa fa-close"></i>
-                    </button>
-                    <h2 id='title'>Sorry !</h2>
-                    <p id='message'> Something went wrong </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--================End Contact Success and Error message Area =================-->
-
-
-
-
-
-    <br><br><br> {% block content %} {% endblock %}
-
-
-    <!--================ start footer Area  =================-->
-    <footer class="bg-dark">
-        <hr>
-        <hr>
-
-        <div class="container bg-dark">
-
-            <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta deserunt perferendis sequi odit
-                exercitationem ut doloribus rerum in voluptas, porro voluptatibus odio, quod minima rem, aspernatur
-                accusamus ullam velit. Commodi.
-            </p>
-            <div class="row text-center">
-                {% for i in '1234' %}
-                <div class="col-lg-3">
-                    <h5>Some Text</h5>
-                    <p>
-                        Veniam tempor <br>
-                        deserunt id <br>
-                        quis anim <br>
-                        occaecat <br>
-                        nulla ea.
-                    </p>
-                </div>
-                {% endfor%}
-            </div>
-            <hr class="bg-light">
-            <div class="row text-light">
-                <div>
-                    <p>copyright &copy; Buildovo 2019</p>
-                </div>
+            <hr>
+            <ul class="list-unstyled list-inline mb-0 text-center">
+                <li class="list-inline-item">
+                    <a href="#" target="_blank">
+                        <img src="https://www.vectorvest.com/wp-content/themes/vectorvest/images/social-facebook-white.png"
+                            alt="">
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#" target="_blank">
+                        <img src="https://www.vectorvest.com/wp-content/themes/vectorvest/images/social-twitter-white.png"
+                            alt="">
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#" target="_blank">
+                        <img src="https://www.vectorvest.com/wp-content/themes/vectorvest/images/social-googleplus-white.png"
+                            alt="">
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#" target="_blank">
+                        <img src="https://www.vectorvest.com/wp-content/themes/vectorvest/images/social-linkdin-white.png"
+                            alt="">
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#" target="_blank">
+                        <img src="https://www.vectorvest.com/wp-content/themes/vectorvest/images/social-youtube-white.png"
+                            alt="">
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div class="col-12 text-center text-white">
+                <p>Copyright © All rights reserved | <span class="text-warning">Buildovo Pvt. Ltd.</span></p>
             </div>
         </div>
     </footer>
     <!--================ End footer Area  =================-->
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="/js/jquery-3.2.1.min.js"></script>
-    <script src="/js/popper.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/stellar.js"></script>
-    <script src="/vendors/lightbox/simpleLightbox.min.js"></script>
-    <script src="/vendors/nice-select/js/jquery.nice-select.min.js"></script>
-    <script src="/vendors/isotope/imagesloaded.pkgd.min.js"></script>
-    <script src="/vendors/isotope/isotope-min.js"></script>
-    <script src="/vendors/owl-carousel/owl.carousel.min.js"></script>
-    <script src="/js/jquery.ajaxchimp.min.js"></script>
-    <script src="/vendors/counter-up/jquery.waypoints.min.js"></script>
-    <script src="/vendors/counter-up/jquery.counterup.js"></script>
-    <script src="/js/mail-script.js"></script>
-    <script src="/vendors/popup/jquery.magnific-popup.min.js"></script>
+    <!-- Jquery  -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
 
-    
+    <!-- popper .js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+
+    <!-- Bootstrap js -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+    <!-- angular.js -->
     <script src="/js/angular.min.js"></script>
-    <script src="/reload/reload.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-    <script src="/customjs/jquery-ui.min.js"></script>
-    <script src="/js/jquery.dataTables.min.js"></script>
-    <script src="/customjs/header.js"></script>
 
-    <!-- <script src="js/theme.js"></script> -->
+    <!-- <script src="/reload/reload.js"></script> -->
+
+    <!-- datatable bootstrap.js -->
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <!-- jquery-ui.min.js -->
+    <script src="/customjs/jquery-ui.min.js"></script>
+
+    <!-- Datatable js -->
+    <script src="/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(function () {
+            $("#menu-toggle").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+
+            $(window).resize(function (e) {
+                if ($(window).width() > 768) {
+                    $("#wrapper").addClass("d-none");
+                } else {
+                    $("#wrapper").removeClass("d-none");
+                }
+            });
+        });
+    </script>
 
     {% block scripts %} {% endblock %}
 </body>

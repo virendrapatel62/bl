@@ -6,6 +6,7 @@ const logger = require('debug')('index')
 const winston = require('winston')
 const config = require('config')
 
+
 // for printing the request info
 app.use(function (req, res, next) {
 
@@ -18,7 +19,6 @@ app.use(function (req, res, next) {
     || req.url.includes('jpg')){
 
     }else{
-
         console.log(`Url : ${req.url} , Body : ${req.method}` );
     }
     next()

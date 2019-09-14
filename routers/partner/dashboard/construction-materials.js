@@ -13,21 +13,20 @@ Router.get('/', partnerAuthMiddleware, async (req, res) => {
     const template = swig.compileFile(path.join(__dirname, "/../../../html/partner/dashboard_html/select_construction_materials.html"))
     const partner = req.session.partner
 
-    //getting partner's products // MRPS Objects
-    const partnerProductMrps = await PartnerProduct.find({ partner: partner }).select('mrp -_id');
-    const partnerProductMrpsArray = [];
-    logger(partnerProductMrps)
-    for (let i in partnerProductMrps) {
-        partnerProductMrpsArray.push(partnerProductMrps[i].mrp);
-    }
+    // //getting partner's products // MRPS Objects
+    // const partnerProductMrps = await PartnerProduct.find({ partner: partner }).select('mrp -_id');
+    // const partnerProductMrpsArray = [];
+    // logger(partnerProductMrps)
+    // for (let i in partnerProductMrps) {
+    //     partnerProductMrpsArray.push(partnerProductMrps[i].mrp);
+    // }
     // logger({partnerProduct})
     const materials = await Product.getAll();
     // logger(partner)
     for (var m in materials) {
         const mrp = materials[m].MRP;
         for (n in mrp) {
-            mrp[n].partnerProduct = await PartnerProduct.findOne({ mrp: mrp[n]._id }).populate('productStock').select();
-            // console.log(mrp[n].partnerProduct ? mrp[n].partnerProduct.productStock.stock : "" );
+            mrp[n].partnerProduct = await PartnerProduct.findOne({ mrp: mrp[n]._id , partner : partner }).populate('productStock').select();
         }
     }
     // console.log(materials);

@@ -249,4 +249,34 @@ app.controller('constructionMaterialsController', function ($scope, $http) {
     $scope.rowClick = function (event) {
         // console.log(event.target);
     }
+
+
+
+    // show selling products
+    $scope.sellingProducts = function(){
+        console.log('sellingproducts...');
+        var elem = $('tbody>tr:not(.selected)').hide();
+        var elem = $('tbody>tr.selected').show();
+
+        $scope.all = ''
+        $scope.not = ''
+        $scope.selling = 'active'
+    }
+    // show selling products
+    $scope.allProducts = function(){
+        console.log('sellingproducts...');
+        var elem = $('tbody>tr').show();
+        $scope.all = 'active'
+        $scope.not = ''
+        $scope.selling = ''
+    }
+    // show selling products
+    $scope.notSellingProducts = function(){
+        $scope.all = ''
+        $scope.not = 'active'
+        $scope.selling = ''
+        console.log('sellingproducts...');
+        var elem = $('tbody>tr.selected').hide();
+        var elem = $('tbody>tr:not(.selected)').show();
+    }
 })

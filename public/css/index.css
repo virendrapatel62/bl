@@ -1,0 +1,48 @@
+.myCarousel h2 {
+    color: #000;
+    font-size: 26px;
+    font-weight: 300;
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+    margin: 30px 0 80px;
+}
+
+.myCarousel h2 b {
+    color: #ffc000;
+}
+
+.myCarousel h2::after {
+    content: "";
+    width: 100px;
+    position: absolute;
+    margin: 0 auto;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.2);
+    left: 0;
+    right: 0;
+    bottom: -20px;
+}
+
+.myCarousel .carousel {
+    margin: 50px auto;
+    padding: 0 70px;
+}
+
+.myCarousel .carousel .thumb-content {
+    padding: 15px;
+}
+
+.myCarousel .carousel .carousel-control {
+    height: 100px;
+    width: 40px;
+    background: none;
+    margin: auto 0;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.myCarousel .carousel .carousel-control i {
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+}

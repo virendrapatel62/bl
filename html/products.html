@@ -1,0 +1,187 @@
+{% extends 'header_footer_template.html' %}
+
+{% block title %}Products{% endblock %}
+{% block content%}
+
+
+<div class="container-flude mx-4" ng-app='productApp' ng-controller='productController' data-ng-init="init()">
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-0 col-0">
+            <div class="list-group mt-4 d-none d-md-block">
+                <style>
+                    .atv {
+                        background-color: #ffbd2e;
+                        border-color: #ffbd2e;
+                    }
+
+                    .txt-ylo {
+                        color: #ffbd2e;
+                        border-color: #ffbd2e;
+                    }
+
+                    .txt-ylo:hover {
+                        color: #ffbd2e;
+                        border-width: 2px;
+                    }
+
+                    .card-body a {
+                        color: #ffbd2e;
+                    }
+                </style>
+                <a class="list-group-item text-white atv" data-toggle="collapse" href="#collapse0" role="button"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    Cetagiory
+                </a>
+                <div class="collapse" id="collapse0">
+                    <div class="card card-body">
+                        <dl>
+                            <li><a href="#">type1</a></li>
+                            <li><a href="#">type2</a></li>
+                        </dl>
+                    </div>
+                </div>
+                <a class="list-group-item txt-ylo" data-toggle="collapse" href="#collapse4" role="button"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    Type
+                </a>
+                <div class="collapse" id="collapse4">
+                    <div class="card card-body">
+                        <dl>
+                            <li><a href="#">All</a></li>
+                            <li><a href="#">type1</a></li>
+                            <li><a href="#">type1</a></li>
+                            <li><a href="#">type1</a></li>
+                        </dl>
+                    </div>
+                </div>
+                <a class="list-group-item txt-ylo" data-toggle="collapse" href="#collapse2" role="button"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    Price
+                </a>
+                <div class="collapse" id="collapse2">
+                    <div class="card card-body">
+                        <dl>
+                            <li><a href="#">All</a></li>
+                            <li><a href="#">type1</a></li>
+                            <li><a href="#">type1</a></li>
+                            <li><a href="#">type1</a></li>
+                        </dl>
+                    </div>
+                </div>
+                <a class="list-group-item  txt-ylo" data-toggle="collapse" href="#collapse3" role="button"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    Range
+                </a>
+                <div class="collapse" id="collapse3">
+                    <div class="card card-body">
+                        <dl>
+                            <li><a href="#">All</a></li>
+                            <li><a href="#">type1</a></li>
+                            <li><a href="#">type1</a></li>
+                            <li><a href="#">type1</a></li>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-lg-3 -->
+        <div class="col-lg-10 col-md-10 my-4">
+            <!--Product Card View START-->
+            <ul class="nav nav-tabs p-2" id="myTab" role="tablist">
+                <!-- <li class="nav-item">
+                    <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all"
+                        aria-selected="true">All</a>
+                </li> -->
+                <!-- <li class="nav-item">
+                    <a class="nav-link" id="cls-9-tab" data-toggle="tab" href="#cls-9" role="tab" aria-controls="cls-9"
+                        aria-selected="false">Bricks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="cls-10-tab" data-toggle="tab" href="#cls-10" role="tab"
+                        aria-controls="cls-10" aria-selected="false">Steel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="cls-11-tab" data-toggle="tab" href="#cls-11" role="tab"
+                        aria-controls="cls-11" aria-selected="false">other</a>
+                </li> -->
+                <div class="ml-auto d-none d-md-block">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap ">
+                        <form class="form-inline" method="get" action="search.html">
+                            <div class="row container">
+                                <input class="form-control form-control-sm col-8" name="searchInput" type="search"
+                                    placeholder="Search" aria-label="Search">
+                                <button class="btn btn-sm btn-outline-warning col-4" type="submit">Search</button>
+                            </div>
+                        </form>
+                        <div>
+                            <select class="custom-select custom-select-sm">
+                                <option selected>Sort</option>
+                                <option value="1">Price</option>
+                                <option value="2">class</option>
+                                <option value="3">Update</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+            <!-- <link rel="stylesheet" href="css/card.css"> -->
+            <div class="tab-content" id="myTabContent">
+                <div class="alert alert-warning m-3" ng-if='!products'>
+                    <h4>No Products</h4>
+                </div>
+                
+                <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                    <div class="container-flude mt-3">
+                        <div class="row">
+                            <!-- Product Card  -->
+                            <div class="col-md-3 col-sm-6 col-6 mb-md-3 mb-0" ng-if='products' ng-repeat='product in products'>
+                                <div class="product-grid3" style="filter: drop-shadow(4px 4px 5px lightgray);">
+                                    <div class="product-image3">
+                                        <a href="product.html">
+                                            <img class="pic-1 p-2" ng-repeat='img in product.images' ng-if='$index == 0' src="/file?img=[[img]]">
+                                            <img class="pic-2" ng-repeat='img in product.images' ng-if='$index == 0' src="/file?img=[[img]]">
+                                        </a>
+                                        <ul class="social">
+                                            <li class="social-1"><a href="#"><i class="fa fa-shopping-cart"></i></a>
+                                            </li>
+                                            <li class="social-2"><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        </ul>
+                                        <span class="product-new-label">New</span>
+                                    </div>
+                                    <div class="product-content">
+                                        <h3 class="title"><a href="product.html">[[product.productName]]</a></h3>
+                                        <div class="price">
+                                            &#8377; 250.00 / Unit<br>
+                                            <span> &#8377; 300.00</span>
+                                        </div>
+                                        <ul class="rating">
+                                            <li class="fa fa-star"></li>
+                                            <li class="fa fa-star"></li>
+                                            <li class="fa fa-star"></li>
+                                            <li class="fa fa-star"></li>
+                                            <li class="fa fa-star disable"></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--Product Card View END-->
+        </div>
+        <!-- /.col-lg-9 -->
+    </div>
+    <!-- /.row -->
+</div>
+
+
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="/js/products.js"></script>
+{% endblock %}

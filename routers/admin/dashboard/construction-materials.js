@@ -132,7 +132,7 @@ Router.post('/save-brand', uploadProduct.array('photos'), async (req, res) => {
     const images = []
     for (var i in req.files) {
         var file = req.files[i];
-        var filepath = `${file.destination}/${file.filename}.png`;
+        var filepath = `${file.destination}/${file.filename}`;
         images.push(filepath)
     }
     log(images);
@@ -171,7 +171,7 @@ Router.post('/save-product-size', uploadVerient.array('photos'), async (req, res
     const images = []
     for (var i in req.files) {
         var file = req.files[i];
-        var filepath = `${file.destination}/${file.filename}.png`;
+        var filepath = `${file.destination}/${file.filename}`;
         images.push(filepath)
     }
     log(images);
@@ -212,7 +212,7 @@ Router.post('/save-product-varient', uploadVerient.array('photos'), async (req, 
     const images = []
     for (var i in req.files) {
         var file = req.files[i];
-        var filepath = `${file.destination}/${file.filename}.png`;
+        var filepath = `${file.destination}/${file.filename}`;
         images.push(filepath)
     }
     log(images);

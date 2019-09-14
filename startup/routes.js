@@ -54,6 +54,7 @@ module.exports = function (app) {
     
     // common routes
     {
+        app.use('/products' ,require('../routers/products'))
         app.use('/login' ,require('../routers/login'))
         app.use('/signup', require('../routers/signup'))
         app.use('/reset-password', require('../routers/reset-password'))

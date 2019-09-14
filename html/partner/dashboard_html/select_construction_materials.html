@@ -40,16 +40,24 @@
     </div>
 
     <hr>
-    <div class="row col-lg-11 mx-auto">
-        <p class="mr-3"><i class="fa fa-check-circle font-15 text-success"
-                style="vertical-align: middle"></i>&nbsp;Selling </p>
-        <p class=""><i class="fa fa-check-circle font-15 text-disabled" style="vertical-align: middle"></i>&nbsp;Not
-            Selling
-        </p>
-    </div>
-    <hr>
+
+    <!-- nav for filtter data in seeling , not selling , All -->
+    <ul class="nav nav-tabs" ng-init='all="active"'>
+        <li class="nav-item" ng-click='allProducts()'>
+            <a href="javascript:void(0);" class="nav-link" ng-class='all'>
+                <i class="fa fa-list font-15 text-info" style="vertical-align: middle"></i>
+                All Products
+            </a>
+        </li>
+        <li class="nav-item" ng-click='sellingProducts()'><a href="javascript:void(0);" class="nav-link" ng-class='selling'>
+                <i class="fa fa-check-circle font-15 text-success" style="vertical-align: middle"></i>
+                Selling</a></li>
+        <li class="nav-item" ng-click='notSellingProducts()'><a href="javascript:void(0);" class="nav-link" ng-class='not'>
+                <i class="fa fa-check-circle font-15 text-disabled" style="vertical-align: middle"></i>
+                Not Selling</a></li>
+    </ul>
     <div class="p-2">
-        <table class="table table-sm table-hover table-bordered" id='table' width='100%'>
+        <table class="table table-sm table-hover table-bordered productsTable" id='table' width='100%'>
             <thead class="">
                 <tr>
                     <th>Product</th>
@@ -66,8 +74,9 @@
             <tbody>
                 {% for product in constructionMaterial %}
                 {% for MRP in product.MRP %}
-                <tr ng-click='rowClick($event);' class="selected">
+                <tr ng-click='rowClick($event);' {% if MRP.partnerProduct %} class="selected" {% endif %}>
                     <td>
+                        <!-- who have partner product object meance the are seeling product -->
                         {% if MRP.partnerProduct %}
                         <i class="fa fa-check-circle font-15 text-success" style="vertical-align: middle"></i>
                         {% else %}
@@ -90,14 +99,14 @@
                     <!-- for add Stock -->
                     {% if product.productStockType == stockTypes.MULTIPLE %}
 
-                    <td class='label{{MRP | createIdForHtml()}}'>{{MRP.partnerProduct.productStock.stock  | default(0)}}</td>
+                    <td class='label{{MRP | createIdForHtml()}}'>{{MRP.partnerProduct.productStock.stock  | default(0)}}
+                    </td>
                     <td class="">
                         <input type="number" product-id='add{{MRP | createIdForHtml()}}'
                             ng-focus='addQuantityFocus($event , "{{MRP | createIdForHtml()}}")'
                             ng-keyup='blurOnKeyPress($event)'
                             ng-blur='onInputQuantity($event , "{{MRP._id.toString()}}"  , "{{product._id.toString()}}" , "{{MRP | createIdForHtml()}}" );'
-                            name="quantity"
-                            class="form-control form-control-sm {{ MRP | createIdForHtml()}} mx-auto"
+                            name="quantity" class="form-control form-control-sm {{ MRP | createIdForHtml()}} mx-auto"
                             placeholder="Enter Quantity">
                     </td>
 
@@ -108,12 +117,12 @@
                             ng-focus='removeQuantityFocus($event , "{{MRP | createIdForHtml()}}")'
                             ng-keyup='blurOnKeyPress($event)'
                             ng-blur='onRemoveQuantity($event , "{{MRP._id.toString()}}"  , "{{product._id.toString()}}" , "{{MRP | createIdForHtml()}}" );'
-                            name="quantity"
-                            class="form-control form-control-sm {{ MRP | createIdForHtml()}} mx-auto"
+                            name="quantity" class="form-control form-control-sm {{ MRP | createIdForHtml()}} mx-auto"
                             placeholder="Enter Quantity" min="1">
                     </td>
                     {% else %}
-                    <td class='label{{product | createIdForHtml()}}'>{{MRP.partnerProduct.productStock.stock| default(0)}}</td>
+                    <td class='label{{product | createIdForHtml()}}'>
+                        {{MRP.partnerProduct.productStock.stock| default(0)}}</td>
                     <td class="">
                         <input type="number" ng-focus='addQuantityFocus($event , "{{product | createIdForHtml()}}")'
                             ng-blur='onInputQuantity($event , "{{MRP._id.toString()}}"  , "{{product._id.toString()}}" , "{{product | createIdForHtml()}}" );'
@@ -127,7 +136,7 @@
                             ng-blur='onRemoveQuantity($event , "{{MRP._id.toString()}}"  , "{{product._id.toString()}}" , "{{product | createIdForHtml()}}" );'
                             ng-keyup='blurOnKeyPress($event)' name="quantity"
                             class="form-control form-control-sm {{ product | createIdForHtml()}} mx-auto"
-                           placeholder="Enter Quantity" min="1">
+                            placeholder="Enter Quantity" min="1">
                     </td>
                     {% endif %}
 
