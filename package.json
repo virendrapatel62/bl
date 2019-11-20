@@ -13,7 +13,7 @@
     "author": "buildovo",
     "license": "ISC",
     "dependencies": {
-        "angular": "^1.7.8",
+        "angular": "^1.7.9",
         "body-parser": "^1.19.0",
         "bootstrap": "^4.3.1",
         "browser-refresh": "^1.7.3",
